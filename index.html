@@ -1,786 +1,506 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Wrench, 
-  Wind, 
-  ThermometerSnowflake, 
-  Flame, 
-  Droplets, 
-  Phone, 
-  Mail, 
-  ShieldCheck, 
-  Clock, 
-  Settings, 
-  CheckCircle,
-  Menu,
-  X,
-  Info,
-  ChevronRight,
-  ArrowLeft,
-  MapPin,
-  HelpCircle,
-  MessageCircle,
-  Star,
-  Globe
-} from 'lucide-react';
-
-const blogPosts = [
-  {
-    title: "Cómo alargar la vida útil de tu lavadora",
-    excerpt: "Descubre los mejores consejos de mantenimiento preventivo para evitar averías costosas en tu lavadora.",
-    date: "15 Feb 2026",
-    category: "Mantenimiento",
-    slug: "reparar-lavadora-madrid",
-    content: [
-      "La lavadora es uno de los electrodomésticos que más usamos en nuestro hogar y, a menudo, el que más descuidamos. En la Comunidad de Madrid, donde el uso diario es intensivo por el ritmo de vida, llevar un mantenimiento preventivo es vital para evitar averías costosas.",
-      "El primer consejo de oro es la limpieza del filtro y la goma de la puerta. Al menos una vez cada dos meses, revisa el filtro (generalmente situado en la parte inferior frontal) para retirar monedas o pelusas que puedan obstruir la bomba. Pasar un paño seco por la goma de la puerta después de cada ciclo de lavado evitará la acumulación de humedad y malos olores.",
-      "Otro error sumamente común es el exceso de detergente y suavizante. Usar más jabón del necesario no deja la ropa más limpia; crea un exceso de espuma que fuerza el sistema de vaciado y deja residuos calcáreos en los conductos internos.",
-      "Finalmente, respeta siempre la capacidad de carga recomendada. Sobrecargar el tambor desequilibra el eje durante el centrifugado. Como regla general: deja siempre un palmo de espacio libre.",
-      "Si a pesar de estos cuidados notas que el tambor no gira o pierde agua, necesitas un técnico de electrodomésticos urgente Madrid. Recuerda que en NOWDIS ESPAÑA somos expertos en la reparación de lavadoras en Madrid y no cobramos desplazamiento. Llámanos y evaluaremos tu lavadora rápidamente."
-    ]
-  },
-  {
-    title: "Por qué tu frigorífico no enfría correctamente",
-    excerpt: "Repasamos las causas más comunes por las que tu nevera puede dejar de enfriar y qué hacer al respecto.",
-    date: "02 Feb 2026",
-    category: "Resolución",
-    slug: "frigorifico-no-enfria-madrid",
-    content: [
-      "Llegar a la cocina y descubrir que los alimentos del frigorífico no están fríos es una urgencia, especialmente durante los calurosos meses de verano en Madrid. Antes de alarmarte, hay varias comprobaciones que puedes realizar.",
-      "La causa más frecuente de un frigorífico que pierde potencia es la acumulación de suciedad en las bobinas del condensador. Si están cubiertas de polvo, el motor tendrá que trabajar el doble para intentar enfriar, a menudo sin éxito. Limpiarlas con una aspiradora suave una vez al año soluciona el problema de raíz.",
-      "Otro sospechoso habitual son las juntas de goma de las puertas. Si la goma está gastada o sucia, el aire frío se escapará constantemente. Para comprobarlo, cierra la puerta atrapando un billete. Si puedes sacarlo sin resistencia, la goma necesita ser reemplazada.",
-      "¿Has comprobado todo esto y sigue sin enfriar? Podría tratarse de una fuga de gas o un fallo en el compresor. Contacta con nuestro Servicio Técnico especializado en reparación de frigoríficos en Madrid; localizaremos la avería sin cobrarte los gastos de desplazamiento."
-    ]
-  },
-  {
-    title: "Preparando tu Aire Acondicionado para el verano",
-    excerpt: "No esperes a la ola de calor. Te enseñamos a poner a punto tu equipo de climatización paso a paso.",
-    date: "10 Ene 2026",
-    category: "Climatización",
-    slug: "mantenimiento-aire-acondicionado-madrid",
-    content: [
-      "Las olas de calor en Madrid no perdonan, y esperar al mes de julio para encender tu aire acondicionado por primera vez en el año es un error que puede salirte muy caro. Una correcta puesta a punto primaveral garantiza un funcionamiento eficiente y un aire más limpio.",
-      "El paso número uno y más importante es la limpieza de los filtros del split. Unos filtros sucios no solo reducen drásticamente la capacidad de enfriar, sino que aumentan el consumo eléctrico hasta un 15%. Lávalos con agua templada y jabón neutro, y déjalos secar a la sombra.",
-      "A continuación, comprueba el estado de la unidad exterior. Asegúrate de que no haya hojas secas obstruyendo el ventilador. El flujo de aire en el exterior debe estar completamente despejado.",
-      "Una vez limpio, enciende el equipo en modo frío a la temperatura más baja durante 15 minutos. Si notas que el flujo de aire es débil o no enfría, es un síntoma claro de falta de gas refrigerante.",
-      "No esperes a estar a 40 grados. Como SAT aire acondicionado Madrid referente, en NOWDIS ESPAÑA somos especialistas en instalación y reparación en toda la Comunidad de Madrid. Llámanos para una revisión a tiempo."
-    ]
-  }
-];
-
-const faqs = [
-  {
-    q: "¿Cobramos desplazamiento en Madrid?",
-    a: "No, en NOWDIS ESPAÑA no cobramos el desplazamiento a su domicilio en ningún municipio de la Comunidad de Madrid. Solo se factura la localización de la avería en el caso de que decida no aceptar el presupuesto de reparación."
-  },
-  {
-    q: "¿Qué marcas reparamos?",
-    a: "Somos un Servicio Técnico (SAT) Multimarca. Reparamos todas las principales marcas del mercado en gama blanca: Bosch, Balay, Siemens, AEG, LG, Samsung, Teka, Fagor, Beko, Whirlpool, entre otras."
-  },
-  {
-    q: "¿Cuánto tarda un técnico en llegar?",
-    a: "Ofrecemos un servicio de asistencia rápida. En la mayoría de los casos en Madrid capital y grandes municipios (Móstoles, Alcalá, Getafe...), un técnico estará en su domicilio en menos de 24 horas desde su llamada."
-  }
-];
-
-const serviceAreas = [
-  { region: "Madrid Capital", districts: ["Centro", "Salamanca", "Chamartín", "Retiro", "Chamberí", "Tetuán", "Hortaleza", "Vallecas"] },
-  { region: "Zona Sur", districts: ["Móstoles", "Alcorcón", "Getafe", "Leganés", "Fuenlabrada", "Parla", "Pinto", "Valdemoro"] },
-  { region: "Corredor del Henares", districts: ["Alcalá de Henares", "Torrejón de Ardoz", "Coslada", "San Fernando de Henares"] },
-  { region: "Zona Noroeste", districts: ["Pozuelo de Alarcón", "Majadahonda", "Las Rozas", "Boadilla del Monte", "Villalba"] }
-];
-
-export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState('inicio');
-  const [activePost, setActivePost] = useState(null);
-  
-  // Estados para Mejoras
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [language, setLanguage] = useState('es');
-  const [formStatus, setFormStatus] = useState('idle');
-
-  // Funciones de SEO dinámico
-  useEffect(() => {
-    const urlPath = currentPage === 'post' && activePost 
-      ? `/blog/${activePost.slug}` 
-      : currentPage === 'inicio' ? '/' : `/${currentPage}`;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOWDIS | SAT Madrid</title>
+    <meta name="description" content="Servicio Técnico Multimarca en Madrid. Reparación de electrodomésticos sin cobrar desplazamiento.">
     
-    try {
-      window.history.pushState({}, '', urlPath);
-    } catch (err) {}
-
-    let pageTitle = "NOWDIS | SAT Madrid";
-    let metaDesc = "Servicio Técnico Multimarca en Madrid.";
+    <!-- Tailwind CSS (CDN para usarlo directo en HTML) -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    switch(currentPage) {
-      case 'inicio':
-        pageTitle = "Servicio Técnico de Electrodomésticos en la Comunidad de Madrid – NOWDIS";
-        metaDesc = "Reparación experta de electrodomésticos y aire acondicionado en Madrid. SAT Multimarca desde 1995. ¡No cobramos desplazamiento!";
-        break;
-      case 'servicios':
-        pageTitle = "Reparación de Electrodomésticos en Madrid – Lavadoras, Hornos, Aire Acondicionado";
-        metaDesc = "Reparamos todas las marcas de lavadoras, frigoríficos, lavavajillas y aire acondicionado en toda la Comunidad de Madrid.";
-        break;
-      case 'nosotros':
-        pageTitle = "SAT Multimarca en Madrid desde 1995 – NOWDIS";
-        metaDesc = "Conoce NOWDIS ESPAÑA S.L., tu servicio técnico de confianza en Madrid con más de 25 años de experiencia reparando gama blanca.";
-        break;
-      case 'blog':
-        pageTitle = "Consejos de Reparación de Electrodomésticos en Madrid | Blog NOWDIS";
-        metaDesc = "Blog de NOWDIS: trucos, guías de mantenimiento y consejos para alargar la vida de tus electrodomésticos y aire acondicionado.";
-        break;
-      case 'post':
-        if(activePost) {
-          pageTitle = `${activePost.title} | NOWDIS Madrid`;
-          metaDesc = activePost.excerpt;
+    <!-- Configuración de colores personalizados de la marca -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        trustBlue: '#1A4B84',
+                        frostCyan: '#00A8E8',
+                        electricOrange: '#FF6B35',
+                        steelGrey: '#4A4A4A',
+                        cleanWhite: '#FFFFFF'
+                    }
+                }
+            }
         }
-        break;
-      case 'zonas':
-        pageTitle = "Zonas de Servicio en Madrid – Reparación de Electrodomésticos | NOWDIS";
-        metaDesc = "Damos servicio técnico en Madrid Capital, Móstoles, Alcalá de Henares, Getafe, Leganés, Pozuelo y toda la Comunidad de Madrid. Desplazamiento gratuito.";
-        break;
-      case 'contacto':
-        pageTitle = "SAT en Madrid sin Cobrar Desplazamiento – Contacto NOWDIS";
-        metaDesc = "Contacta con nuestro servicio técnico en Madrid. Llama al 630 215 858 o 91 407 30 28. Atendemos averías rápidamente en toda la región.";
-        break;
-      default:
-        break;
-    }
-    document.title = pageTitle;
-  }, [currentPage, activePost]);
+    </script>
 
-  // Navegación con transición suave
-  const navigate = (page, post = null) => {
-    setIsAnimating(true);
-    setTimeout(() => {
-      setCurrentPage(page);
-      setActivePost(post);
-      setIsMenuOpen(false);
-      window.scrollTo(0, 0);
-      setIsAnimating(false);
-      setFormStatus('idle'); 
-    }, 200); 
-  };
+    <!-- Iconos de FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .page-section { display: none; opacity: 0; transition: opacity 0.3s ease-in-out; }
+        .page-section.active { display: block; opacity: 1; }
+        
+        /* Efecto del botón de WhatsApp */
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-bounce-slow { animation: bounce-slow 3s infinite; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-50 text-gray-800">
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    setFormStatus('submitting');
-    setTimeout(() => {
-      setFormStatus('success');
-    }, 1500);
-  };
+    <!-- Barra de Contacto Superior -->
+    <div class="hidden md:flex justify-between items-center px-8 py-2 text-sm text-white transition-colors bg-trustBlue">
+        <div class="flex items-center space-x-6">
+            <a href="tel:630215858" class="flex items-center hover:text-blue-200"><i class="fas fa-phone mr-2"></i> 630 215 858 / 91 407 30 28</a>
+            <a href="mailto:nowdisespana@mail.com" class="flex items-center hover:text-blue-200"><i class="fas fa-envelope mr-2"></i> nowdisespana@mail.com</a>
+        </div>
+        <div class="flex items-center space-x-6">
+            <span class="flex items-center lang-es"><i class="fas fa-clock mr-2"></i> Servicio Técnico desde 1995</span>
+            <span class="flex items-center lang-en hidden"><i class="fas fa-clock mr-2"></i> Est. 1995</span>
+            <button onclick="toggleLanguage()" class="flex items-center bg-white/10 px-3 py-1 rounded-full hover:bg-white/20 transition-colors">
+                <i class="fas fa-globe mr-1"></i> <span id="lang-btn-text">EN</span>
+            </button>
+        </div>
+    </div>
 
-  const colors = {
-    trustBlue: '#1A4B84',
-    frostCyan: '#00A8E8',
-    electricOrange: '#FF6B35',
-    steelGrey: '#4A4A4A',
-    cleanWhite: '#FFFFFF'
-  };
-
-  const detailedServices = [
-    { name: 'Lavadoras', icon: Droplets, desc: 'Solucionamos problemas de centrifugado, pérdidas de agua, fallos electrónicos y bloqueos.', problems: ['No desagua', 'Tambor no gira', 'Pierde agua por la puerta'] },
-    { name: 'Frigoríficos y Neveras', icon: ThermometerSnowflake, desc: 'Reparación de compresores, termostatos, recargas de gas y solución de fugas.', problems: ['No enfría suficiente', 'Crea mucho hielo', 'El motor no para'] },
-    { name: 'Aire Acondicionado', icon: Wind, desc: 'Mantenimiento, recarga de gas, instalación y reparación de splits y conductos.', problems: ['No enfría / No calienta', 'Gotea agua dentro', 'Mal olor al encender'] },
-    { name: 'Lavavajillas', icon: Droplets, desc: 'Desatascos, cambio de bombas de agua, reparación de resistencias y placas electrónicas.', problems: ['No coge agua', 'Se queda con agua al fondo', 'No calienta'] },
-    { name: 'Hornos y Vitrocerámicas', icon: Flame, desc: 'Sustitución de resistencias, placas de inducción, termostatos y módulos de control.', problems: ['No calienta', 'No detecta la sartén', 'Salta el diferencial'] },
-    { name: 'Secadoras y Campanas', icon: Wind, desc: 'Reparación de motores de extracción, correas, botoneras y limpieza de conductos.', problems: ['No seca la ropa', 'No aspira humo', 'Hace ruido excesivo'] }
-  ];
-
-  const renderPage = () => {
-    switch(currentPage) {
-      case 'servicios':
-        return (
-          <div className="bg-gray-50 min-h-[70vh]">
-            <div className="bg-white py-16 border-b border-gray-200">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 className="text-3xl md:text-5xl font-extrabold mb-6" style={{ color: colors.trustBlue }}>Reparación de Electrodomésticos en Madrid</h1>
-                <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: colors.electricOrange }}></div>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                  Ofrecemos un servicio técnico rápido, profesional y multimarca para toda su gama blanca y climatización. <strong>El desplazamiento es gratuito</strong> en toda la Comunidad de Madrid.
-                </p>
-                <button onClick={() => navigate('contacto')} className="px-8 py-4 rounded-md text-white font-bold text-lg transition-transform hover:scale-105 shadow-md inline-flex items-center" style={{ backgroundColor: colors.electricOrange }}>
-                  <Wrench className="w-5 h-5 mr-2" /> Solicitar Asistencia Técnica
-                </button>
-              </div>
-            </div>
-
-            <div className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {detailedServices.map((service, index) => {
-                  const IconComponent = service.icon;
-                  return (
-                    <div key={index} className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden flex flex-col group">
-                      <div className="p-8 flex-grow">
-                        <div className="flex items-center mb-6">
-                          <div className="w-14 h-14 rounded-xl flex items-center justify-center mr-4 transition-colors duration-300" style={{ backgroundColor: `${colors.frostCyan}20`, color: colors.trustBlue }}>
-                            <IconComponent className="w-7 h-7" />
-                          </div>
-                          <h2 className="text-2xl font-bold text-gray-800">{service.name}</h2>
+    <!-- Navegación -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="navigate('inicio')">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-trustBlue">
+                            <i class="fas fa-wrench text-white text-xl"></i>
                         </div>
-                        <p className="text-gray-600 mb-6 leading-relaxed">{service.desc}</p>
-                        
-                        <div className="bg-gray-50 p-4 rounded-lg">
-                          <p className="text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Averías comunes:</p>
-                          <ul className="space-y-2">
-                            {service.problems.map((prob, i) => (
-                              <li key={i} className="flex items-center text-sm text-gray-600">
-                                <div className="w-1.5 h-1.5 rounded-full mr-2 flex-shrink-0" style={{ backgroundColor: colors.electricOrange }}></div>
-                                {prob}
-                              </li>
-                            ))}
-                          </ul>
+                        <div>
+                            <h1 class="font-bold text-2xl tracking-tight text-trustBlue font-montserrat">NOWDIS</h1>
+                            <p class="text-xs font-semibold tracking-wider text-frostCyan">ESPAÑA S.L.</p>
                         </div>
-                      </div>
-                      <div className="bg-gray-50 px-8 py-4 border-t border-gray-100 mt-auto">
-                        <button onClick={() => navigate('contacto')} className="text-sm font-bold flex items-center transition-colors group-hover:text-blue-700 w-full justify-between" style={{ color: colors.trustBlue }}>
-                          Reparar {service.name.split(' ')[0]} <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                        </button>
-                      </div>
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="bg-white py-20 border-t border-gray-200">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-16">
-                  <h2 className="text-3xl font-bold mb-4" style={{ color: colors.trustBlue }}>Nuestro Proceso de Trabajo</h2>
-                  <div className="w-16 h-1 mx-auto" style={{ backgroundColor: colors.electricOrange }}></div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-                  <div className="hidden md:block absolute top-12 left-[15%] right-[15%] h-0.5 bg-gray-200 z-0"></div>
-                  
-                  <div className="relative z-10 flex flex-col items-center text-center">
-                    <div className="w-24 h-24 rounded-full bg-white border-4 flex items-center justify-center mb-6 shadow-md" style={{ borderColor: colors.frostCyan }}>
-                      <Phone className="w-10 h-10" style={{ color: colors.trustBlue }} />
-                    </div>
-                    <h3 className="text-xl font-bold mb-3 text-gray-800">1. Contáctenos</h3>
-                    <p className="text-gray-600">Llámenos o envíe un formulario. Le daremos cita con un técnico especialista lo antes posible.</p>
-                  </div>
-                  
-                  <div className="relative z-10 flex flex-col items-center text-center">
-                    <div className="w-24 h-24 rounded-full bg-white border-4 flex items-center justify-center mb-6 shadow-md" style={{ borderColor: colors.trustBlue }}>
-                      <MapPin className="w-10 h-10" style={{ color: colors.trustBlue }} />
-                    </div>
-                    <h3 className="text-xl font-bold mb-3 text-gray-800">2. Visita sin Coste</h3>
-                    <p className="text-gray-600">Nos desplazamos gratis por Madrid. Solo cobramos la localización de avería si decide no reparar.</p>
-                  </div>
-                  
-                  <div className="relative z-10 flex flex-col items-center text-center">
-                    <div className="w-24 h-24 rounded-full bg-white border-4 flex items-center justify-center mb-6 shadow-md" style={{ borderColor: colors.electricOrange }}>
-                      <Wrench className="w-10 h-10" style={{ color: colors.trustBlue }} />
-                    </div>
-                    <h3 className="text-xl font-bold mb-3 text-gray-800">3. Reparación in situ</h3>
-                    <p className="text-gray-600">Reparamos su electrodoméstico, utilizando repuestos compatibles y ofreciendo garantía.</p>
-                  </div>
+                <!-- Menú Escritorio -->
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8" id="desktop-menu">
+                    <button onclick="navigate('inicio')" class="nav-btn font-medium transition-colors text-trustBlue border-b-2 border-trustBlue">Inicio</button>
+                    <button onclick="navigate('servicios')" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue">Servicios</button>
+                    <button onclick="navigate('zonas')" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue">Zonas</button>
+                    <button onclick="navigate('nosotros')" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue">Nosotros</button>
+                    <button onclick="navigate('blog')" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue">Blog</button>
+                    <button onclick="navigate('contacto')" class="px-6 py-2 rounded-md text-white font-bold transition-transform hover:scale-105 bg-electricOrange lang-es">Llama ahora</button>
+                    <button onclick="navigate('contacto')" class="px-6 py-2 rounded-md text-white font-bold transition-transform hover:scale-105 bg-electricOrange lang-en hidden">Call now</button>
                 </div>
-              </div>
+
+                <!-- Botón Menú Móvil -->
+                <div class="flex items-center md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <i class="fas fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
             </div>
-          </div>
-        );
-      
-      case 'nosotros':
-        return (
-          <div className="py-20 bg-white min-h-[70vh]">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center" style={{ color: colors.trustBlue }}>
-                SAT Multimarca en Madrid desde 1995 – NOWDIS
-              </h1>
-              <div className="w-24 h-1 mx-auto mb-10" style={{ backgroundColor: colors.electricOrange }}></div>
-              <p className="text-gray-600 mb-6 text-lg leading-relaxed text-center">
-                Fundada en 1995, <strong>NOWDIS ESPAÑA S.L.</strong> nació con una misión clara: ofrecer un servicio técnico de reparación de electrodomésticos honesto, rápido y eficaz en toda la <strong>Comunidad de Madrid</strong>.
-              </p>
-              <p className="text-gray-600 mb-12 text-lg leading-relaxed text-center">
-                Entendemos los problemas que causa una avería en el hogar. Por eso, hemos optimizado nuestro proceso para ofrecer diagnósticos precisos en cualquier punto de la provincia, desde Madrid Centro hasta Alcalá de Henares o Móstoles. Nuestro compromiso con el cliente se refleja en nuestra política: <strong>nunca cobramos por el desplazamiento</strong> hacia su domicilio en Madrid.
-              </p>
-              <div className="bg-blue-50 p-8 rounded-xl border-l-4 shadow-sm" style={{ borderColor: colors.trustBlue }}>
-                <h3 className="font-bold text-xl mb-4" style={{ color: colors.trustBlue }}>Nuestro Compromiso</h3>
-                <ul className="space-y-4">
-                  <li className="flex items-center text-gray-700 text-lg"><CheckCircle className="w-6 h-6 mr-3 text-green-500" /> Profesionales altamente cualificados.</li>
-                  <li className="flex items-center text-gray-700 text-lg"><CheckCircle className="w-6 h-6 mr-3 text-green-500" /> Repuestos adecuados para cada marca.</li>
-                  <li className="flex items-center text-gray-700 text-lg"><CheckCircle className="w-6 h-6 mr-3 text-green-500" /> Presupuestos claros y sin sorpresas.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        );
-      
-      case 'zonas':
-        return (
-          <div className="py-20 bg-gray-50 min-h-[70vh]">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center mb-16">
-                <h1 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: colors.trustBlue }}>Zonas de Servicio de Reparación en la Comunidad de Madrid</h1>
-                <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: colors.electricOrange }}></div>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                  Cubrimos prácticamente toda la geografía madrileña. Nuestros técnicos se desplazan de forma <strong>totalmente gratuita</strong> a las siguientes zonas y municipios para reparar su electrodoméstico o aire acondicionado.
-                </p>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {serviceAreas.map((area, index) => (
-                  <div key={index} className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-                    <div className="flex items-center mb-6 border-b border-gray-100 pb-4">
-                      <MapPin className="w-8 h-8 mr-3" style={{ color: colors.electricOrange }} />
-                      <h2 className="text-2xl font-bold" style={{ color: colors.trustBlue }}>{area.region}</h2>
+        </div>
+
+        <!-- Menú Móvil Desplegable -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-2 pt-2 pb-4 space-y-1 sm:px-3 shadow-lg absolute w-full left-0">
+            <button onclick="navigate('inicio')" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50">Inicio</button>
+            <button onclick="navigate('servicios')" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50">Servicios</button>
+            <button onclick="navigate('zonas')" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50">Zonas de Servicio</button>
+            <button onclick="navigate('nosotros')" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50">Nosotros</button>
+            <button onclick="navigate('blog')" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50">Blog</button>
+            <button onclick="navigate('contacto')" class="block w-full text-center px-4 py-3 mt-4 text-base font-bold text-white rounded-md bg-electricOrange">Contactar</button>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL (Rutas) -->
+    <main class="flex-grow relative">
+
+        <!-- ================= SECCIÓN INICIO ================= -->
+        <section id="inicio" class="page-section active">
+            <!-- HERO -->
+            <div class="relative text-white overflow-hidden bg-trustBlue">
+                <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#ffffff 2px, transparent 2px); background-size: 30px 30px;"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 relative z-10 flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 pr-0 md:pr-10">
+                        <div class="inline-flex items-center px-3 py-1 rounded-full bg-white/20 text-white text-sm font-semibold mb-6">
+                            <i class="fas fa-shield-alt mr-2"></i> 
+                            <span class="lang-es">Fundada en 1995 • Madrid</span>
+                            <span class="lang-en hidden">Established in 1995 • Madrid</span>
+                        </div>
+                        <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight font-montserrat">
+                            <span class="lang-es">Servicio Técnico de <span class="text-frostCyan">Electrodomésticos</span> en Madrid</span>
+                            <span class="lang-en hidden">Expert <span class="text-frostCyan">Appliance Repair</span> in Madrid Region</span>
+                        </h1>
+                        <p class="text-lg md:text-xl mb-8 text-blue-100 lang-es">
+                            Somos tu Servicio Técnico Multimarca de confianza. Reparación de lavadoras, hornos, frigoríficos y aire acondicionado. Rápido y profesional.
+                        </p>
+                        <p class="text-lg md:text-xl mb-8 text-blue-100 lang-en hidden">
+                            Your trusted Multi-brand Technical Service. Repair of washing machines, ovens, fridges, and AC units. Fast and professional.
+                        </p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                            <button onclick="navigate('contacto')" class="px-8 py-4 rounded-md text-white font-bold text-lg text-center transition-transform hover:scale-105 shadow-lg bg-electricOrange">
+                                <span class="lang-es">Solicitar Técnico</span><span class="lang-en hidden">Request Technician</span>
+                            </button>
+                            <button onclick="navigate('servicios')" class="px-8 py-4 rounded-md bg-white text-blue-900 font-bold text-lg text-center transition-colors hover:bg-gray-100">
+                                <span class="lang-es">Ver Servicios</span><span class="lang-en hidden">Our Services</span>
+                            </button>
+                        </div>
                     </div>
-                    <ul className="grid grid-cols-2 gap-4">
-                      {area.districts.map((district, dIndex) => (
-                        <li key={dIndex} className="flex items-center text-gray-700 font-medium">
-                          <CheckCircle className="w-4 h-4 mr-2 text-green-500 flex-shrink-0" />
-                          Reparación en {district}
-                        </li>
-                      ))}
+                    
+                    <!-- Tarjeta de Transparencia (Alineada al pantallazo original) -->
+                    <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center">
+                        <div class="bg-white text-gray-800 p-8 rounded-2xl shadow-2xl max-w-sm w-full transform md:rotate-2 hover:rotate-0 transition-all duration-300">
+                            <div class="flex items-center justify-center w-16 h-16 rounded-full mb-6 mx-auto bg-frostCyan/20 text-trustBlue">
+                                <i class="fas fa-check-circle text-3xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-center mb-4 text-trustBlue font-montserrat">
+                                <span class="lang-es">Política de Transparencia</span><span class="lang-en hidden">Transparency Policy</span>
+                            </h2>
+                            <p class="text-center font-extrabold mb-4 text-lg text-gray-900">
+                                <span class="lang-es">No cobramos desplazamiento.</span><span class="lang-en hidden">Zero call-out charges.</span>
+                            </p>
+                            <div class="bg-gray-100 p-4 rounded-lg border border-gray-200">
+                                <p class="text-sm text-center text-gray-600">
+                                    <span class="lang-es">Solo facturamos la localización de la avería en el caso exclusivo de que decida no proceder con la reparación.</span>
+                                    <span class="lang-en hidden">We only charge for the fault diagnosis in the exclusive case you decide not to proceed with the repair.</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- MARCAS -->
+            <div class="bg-white py-8 border-b border-gray-100 overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 text-center">
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6 lang-es">Reparamos las principales marcas</p>
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6 lang-en hidden">We repair top brands</p>
+                    <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale select-none">
+                        <span class="text-2xl font-black tracking-tighter">BOSCH</span>
+                        <span class="text-2xl font-bold tracking-widest">BALAY</span>
+                        <span class="text-2xl font-sans font-bold">SIEMENS</span>
+                        <span class="text-2xl font-serif font-bold italic">AEG</span>
+                        <span class="text-3xl font-black tracking-tighter">LG</span>
+                        <span class="text-2xl font-bold">SAMSUNG</span>
+                        <span class="text-2xl font-bold tracking-widest text-blue-800">Teka</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TESTIMONIOS -->
+            <div class="bg-gray-50 py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl font-bold mb-4 text-trustBlue font-montserrat">Lo que dicen nuestros clientes</h2>
+                        <div class="w-16 h-1 mx-auto bg-electricOrange"></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Card 1 -->
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                            <div class="flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="text-gray-600 mb-6 italic">"Vinieron el mismo día que llamé. El técnico fue muy educado y arregló mi frigorífico en menos de una hora. Totalmente recomendables."</p>
+                            <div><p class="font-bold text-gray-900">María González</p><p class="text-sm text-gray-500">Madrid Centro</p></div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                            <div class="flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="text-gray-600 mb-6 italic">"Me sorprendió que de verdad no cobraran desplazamiento. Presupuesto claro desde el principio para arreglar la lavadora."</p>
+                            <div><p class="font-bold text-gray-900">David Ruiz</p><p class="text-sm text-gray-500">Alcorcón</p></div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                            <div class="flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="text-gray-600 mb-6 italic">"Los llamé para una urgencia con el Aire Acondicionado en plena ola de calor. Rápidos, limpios y a un precio justo."</p>
+                            <div><p class="font-bold text-gray-900">Laura T.</p><p class="text-sm text-gray-500">Alcalá de Henares</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="py-20 bg-white border-t border-gray-100">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold mb-4 text-trustBlue font-montserrat">Preguntas Frecuentes (FAQ)</h2>
+                        <div class="w-16 h-1 mx-auto bg-electricOrange"></div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                            <h3 class="text-xl font-bold mb-3 flex items-start text-gray-800"><i class="fas fa-question-circle mt-1 mr-3 text-frostCyan"></i> ¿Cobramos desplazamiento en Madrid?</h3>
+                            <p class="text-gray-600 pl-9 leading-relaxed">No, en NOWDIS ESPAÑA no cobramos el desplazamiento a su domicilio en ningún municipio de la Comunidad de Madrid. Solo se factura la localización de la avería en el caso de que decida no aceptar el presupuesto de reparación.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                            <h3 class="text-xl font-bold mb-3 flex items-start text-gray-800"><i class="fas fa-question-circle mt-1 mr-3 text-frostCyan"></i> ¿Qué marcas reparamos?</h3>
+                            <p class="text-gray-600 pl-9 leading-relaxed">Somos un Servicio Técnico (SAT) Multimarca. Reparamos todas las principales marcas del mercado en gama blanca: Bosch, Balay, Siemens, AEG, LG, Samsung, Teka, Fagor, Beko, Whirlpool, entre otras.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN SERVICIOS ================= -->
+        <section id="servicios" class="page-section bg-gray-50 min-h-[70vh]">
+            <div class="bg-white py-16 border-b border-gray-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 class="text-3xl md:text-5xl font-extrabold mb-6 text-trustBlue font-montserrat">Reparación de Electrodomésticos en Madrid</h1>
+                    <div class="w-24 h-1 mx-auto mb-6 bg-electricOrange"></div>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                        Ofrecemos un servicio técnico rápido, profesional y multimarca para toda su gama blanca y climatización. <strong>El desplazamiento es gratuito</strong>.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="services-container">
+                    <!-- Dinámico vía JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN ZONAS ================= -->
+        <section id="zonas" class="page-section bg-gray-50 min-h-[70vh]">
+            <div class="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-trustBlue font-montserrat">Zonas de Servicio en Madrid</h1>
+                    <div class="w-24 h-1 mx-auto mb-6 bg-electricOrange"></div>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Nuestros técnicos se desplazan de forma <strong>totalmente gratuita</strong> a las siguientes zonas y municipios.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="zones-container">
+                    <!-- Dinámico vía JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECCIÓN NOSOTROS ================= -->
+        <section id="nosotros" class="page-section bg-white min-h-[70vh]">
+            <div class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl md:text-4xl font-bold mb-6 text-center text-trustBlue font-montserrat">SAT Multimarca en Madrid desde 1995</h1>
+                <div class="w-24 h-1 mx-auto mb-10 bg-electricOrange"></div>
+                <p class="text-gray-600 mb-6 text-lg leading-relaxed text-center">Fundada en 1995, <strong>NOWDIS ESPAÑA S.L.</strong> nació con una misión clara: ofrecer un servicio técnico de reparación de electrodomésticos honesto, rápido y eficaz en toda la <strong>Comunidad de Madrid</strong>.</p>
+                <p class="text-gray-600 mb-12 text-lg leading-relaxed text-center">Entendemos los problemas que causa una avería en el hogar. Por eso, hemos optimizado nuestro proceso para ofrecer diagnósticos precisos. <strong>Nunca cobramos por el desplazamiento</strong> hacia su domicilio.</p>
+                
+                <div class="bg-blue-50 p-8 rounded-xl border-l-4 border-trustBlue shadow-sm">
+                    <h3 class="font-bold text-xl mb-4 text-trustBlue">Nuestro Compromiso</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center text-gray-700 text-lg"><i class="fas fa-check-circle text-green-500 mr-3"></i> Profesionales altamente cualificados.</li>
+                        <li class="flex items-center text-gray-700 text-lg"><i class="fas fa-check-circle text-green-500 mr-3"></i> Repuestos adecuados para cada marca.</li>
+                        <li class="flex items-center text-gray-700 text-lg"><i class="fas fa-check-circle text-green-500 mr-3"></i> Presupuestos claros y sin sorpresas.</li>
                     </ul>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="mt-12 text-center bg-blue-50 p-6 rounded-lg border border-blue-100">
-                <p className="text-gray-700">¿No encuentras tu localidad? Llámanos. Llegamos a más del 90% de la Comunidad de Madrid.</p>
-              </div>
-            </div>
-          </div>
-        );
-
-      case 'blog':
-        return (
-          <div className="py-20 bg-gray-50 min-h-[70vh]">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center mb-16">
-                <h1 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: colors.trustBlue }}>Consejos de Reparación de Electrodomésticos en Madrid</h1>
-                <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: colors.electricOrange }}></div>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                  Trucos, guías de mantenimiento y noticias de nuestros expertos para el cuidado de tu gama blanca y climatización.
-                </p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {blogPosts.map((post, index) => (
-                  <article key={index} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-100 flex flex-col">
-                    <div className="p-6 flex-grow flex flex-col">
-                      <div className="flex justify-between items-center mb-4">
-                        <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">{post.category}</span>
-                        <time className="text-sm text-gray-400">{post.date}</time>
-                      </div>
-                      <h2 className="text-xl font-bold text-gray-900 mb-3">{post.title}</h2>
-                      <p className="text-gray-600 mb-6 flex-grow">{post.excerpt}</p>
-                      <button onClick={() => navigate('post', post)} className="flex items-center text-sm font-bold transition-colors mt-auto w-max" style={{ color: colors.electricOrange }} aria-label={`Leer artículo: ${post.title}`}>
-                        Leer artículo <ChevronRight className="w-4 h-4 ml-1" />
-                      </button>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        );
-
-      case 'post':
-        if (!activePost) return null;
-        return (
-          <div className="py-20 bg-white min-h-[70vh]">
-            <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-              <button onClick={() => navigate('blog')} className="flex items-center text-gray-500 hover:text-blue-800 transition-colors mb-8 font-medium">
-                <ArrowLeft className="w-5 h-5 mr-2" /> Volver al blog
-              </button>
-              <div className="mb-8">
-                <span className="text-sm font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full mr-4">{activePost.category}</span>
-                <time className="text-sm text-gray-500">{activePost.date}</time>
-              </div>
-              <h1 className="text-3xl md:text-5xl font-bold mb-8 text-gray-900 leading-tight" style={{ color: colors.trustBlue }}>
-                {activePost.title}
-              </h1>
-              
-              <div className="w-full h-64 bg-gray-100 rounded-xl mb-8 flex items-center justify-center border border-gray-200" title={`Imagen ilustrativa: ${activePost.title}`}>
-                 <Wrench className="w-16 h-16 text-gray-300" />
-                 <span className="sr-only">Imagen de {activePost.title}</span>
-              </div>
-
-              <div className="prose prose-lg max-w-none text-gray-700 space-y-6 text-lg">
-                {activePost.content.map((paragraph, idx) => (
-                  <p key={idx} className="leading-relaxed">{paragraph}</p>
-                ))}
-              </div>
-              <div className="mt-16 p-8 bg-blue-50 rounded-2xl border border-blue-100 text-center">
-                <h3 className="text-2xl font-bold mb-4" style={{ color: colors.trustBlue }}>¿Necesitas un técnico de electrodomésticos urgente en Madrid?</h3>
-                <p className="text-gray-700 mb-6">Nuestros profesionales están listos para solucionar cualquier avería hoy mismo. Garantía SAT Multimarca y <strong>sin cobrar desplazamiento</strong>.</p>
-                <button onClick={() => navigate('contacto')} className="px-8 py-3 rounded-md text-white font-bold text-lg transition-transform hover:scale-105" style={{ backgroundColor: colors.electricOrange }}>
-                  Llamar ahora o Solicitar Asistencia
-                </button>
-              </div>
-            </article>
-          </div>
-        );
-
-      case 'contacto':
-        return (
-          <div className="py-20 bg-white min-h-[70vh]">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center mb-16">
-                <h1 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: colors.trustBlue }}>
-                  {language === 'es' ? "Contacto NOWDIS" : "Contact NOWDIS"}
-                </h1>
-                <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: colors.electricOrange }}></div>
-                <p className="text-lg text-gray-600">
-                  {language === 'es' ? "Estamos en toda la Comunidad de Madrid para ayudarte." : "We cover all the Madrid region to help you."}
-                </p>
-              </div>
-              <div className="flex flex-col md:flex-row gap-12 items-start">
-                <div className="w-full md:w-1/2 space-y-8">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center mr-5" style={{ backgroundColor: colors.trustBlue, color: 'white' }}>
-                      <Phone className="w-7 h-7" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">
-                        {language === 'es' ? "Llámanos" : "Call us"}
-                      </p>
-                      <a href="tel:630215858" className="block text-2xl font-bold text-gray-900 hover:text-blue-700 mb-1">630 215 858</a>
-                      <a href="tel:914073028" className="block text-xl font-bold text-gray-900 hover:text-blue-700">91 407 30 28</a>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center mr-5" style={{ backgroundColor: colors.frostCyan, color: 'white' }}>
-                      <Mail className="w-7 h-7" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">
-                        {language === 'es' ? "Escríbenos" : "Email us"}
-                      </p>
-                      <a href="mailto:nowdisespana@mail.com" className="text-lg font-bold text-gray-900 hover:text-blue-700">nowdisespana@mail.com</a>
-                    </div>
-                  </div>
                 </div>
-                <div className="w-full md:w-1/2 bg-gray-50 rounded-2xl p-8 shadow-sm border border-gray-200 relative overflow-hidden">
-                  
-                  {formStatus === 'success' ? (
-                    <div className="absolute inset-0 bg-white flex flex-col items-center justify-center text-center p-8 z-10">
-                      <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
-                        <CheckCircle className="w-10 h-10 text-green-500" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-800 mb-2">¡Solicitud Enviada!</h3>
-                      <p className="text-gray-600 mb-6">Hemos recibido tus datos. Un técnico se pondrá en contacto contigo en los próximos minutos.</p>
-                      <button onClick={() => setFormStatus('idle')} className="text-blue-600 font-bold hover:underline">Enviar otra solicitud</button>
-                    </div>
-                  ) : null}
-
-                  <form className="space-y-5" onSubmit={handleFormSubmit}>
-                    <div>
-                      <input required type="text" placeholder={language === 'es' ? "Nombre completo" : "Full Name"} className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none" />
-                    </div>
-                    <div>
-                      <input required type="tel" placeholder={language === 'es' ? "Teléfono de contacto" : "Phone number"} className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none" />
-                    </div>
-                    <div>
-                      <select required className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white">
-                        <option value="">{language === 'es' ? "Selecciona el aparato averiado" : "Select broken appliance"}</option>
-                        {detailedServices.map((s, i) => <option key={i} value={s.name.toLowerCase()}>{s.name}</option>)}
-                      </select>
-                    </div>
-                    <button 
-                      type="submit" 
-                      disabled={formStatus === 'submitting'}
-                      className="w-full py-4 text-white font-bold rounded-md text-lg transition-all shadow-md mt-4 flex justify-center items-center disabled:opacity-70" 
-                      style={{ backgroundColor: colors.electricOrange }}
-                    >
-                      {formStatus === 'submitting' ? (
-                        <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      ) : (
-                        language === 'es' ? "Solicitar Asistencia" : "Request Service"
-                      )}
-                    </button>
-                  </form>
-                </div>
-              </div>
             </div>
-          </div>
-        );
-      
-      case 'inicio':
-      default:
-        return (
-          <>
-            <div className="relative text-white overflow-hidden" style={{ backgroundColor: colors.trustBlue }}>
-              <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#ffffff 2px, transparent 2px)', backgroundSize: '30px 30px' }}></div>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 relative z-10 flex flex-col md:flex-row items-center">
-                <div className="md:w-1/2 pr-0 md:pr-10">
-                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/20 text-white text-sm font-semibold mb-6">
-                    <ShieldCheck className="w-4 h-4 mr-2" /> 
-                    {language === 'es' ? "Fundada en 1995 • Madrid" : "Established in 1995 • Madrid"}
-                  </div>
-                  <h1 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
-                    {language === 'es' ? (
-                      <>Servicio Técnico de <span style={{ color: colors.frostCyan }}>Electrodomésticos</span> en Madrid</>
-                    ) : (
-                      <>Expert <span style={{ color: colors.frostCyan }}>Appliance Repair</span> in Madrid Region</>
-                    )}
-                  </h1>
-                  <p className="text-lg md:text-xl mb-8 text-blue-100">
-                    {language === 'es' 
-                      ? "Somos tu Servicio Técnico Multimarca de confianza. Reparación de lavadoras, hornos, frigoríficos y aire acondicionado. Rápido y profesional."
-                      : "Your trusted Multi-brand Technical Service. Repair of washing machines, ovens, fridges, and AC units. Fast and professional."}
-                  </p>
-                  <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <button onClick={() => navigate('contacto')} className="px-8 py-4 rounded-md text-white font-bold text-lg text-center transition-transform hover:scale-105 shadow-lg" style={{ backgroundColor: colors.electricOrange }}>
-                      {language === 'es' ? "Solicitar Técnico" : "Request Technician"}
-                    </button>
-                    <button onClick={() => navigate('servicios')} className="px-8 py-4 rounded-md bg-white text-blue-900 font-bold text-lg text-center transition-colors hover:bg-gray-100">
-                      {language === 'es' ? "Ver Servicios" : "Our Services"}
-                    </button>
-                  </div>
+        </section>
+
+        <!-- ================= SECCIÓN CONTACTO ================= -->
+        <section id="contacto" class="page-section bg-white min-h-[70vh]">
+            <div class="py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-trustBlue font-montserrat lang-es">Contacto NOWDIS</h1>
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-trustBlue font-montserrat lang-en hidden">Contact NOWDIS</h1>
+                    <div class="w-24 h-1 mx-auto mb-6 bg-electricOrange"></div>
                 </div>
-                <div className="md:w-1/2 mt-12 md:mt-0 flex justify-center lg:justify-end">
-                  <div className="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl shadow-2xl max-w-sm w-full transition-transform hover:-translate-y-2 duration-300">
-                    <div className="flex items-center mb-6 border-b border-white/10 pb-6">
-                      <div className="w-14 h-14 rounded-full flex items-center justify-center mr-4 bg-gradient-to-br from-blue-400 to-blue-600 shadow-inner flex-shrink-0">
-                        <CheckCircle className="w-7 h-7 text-white" />
-                      </div>
-                      <h2 className="text-xl font-bold text-white leading-tight">
-                        {language === 'es' ? "Compromiso de Transparencia" : "Transparency Commitment"}
-                      </h2>
+                
+                <div class="flex flex-col md:flex-row gap-12 items-start">
+                    <div class="w-full md:w-1/2 space-y-8">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center mr-5 bg-trustBlue text-white"><i class="fas fa-phone text-xl"></i></div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Llámanos</p>
+                                <a href="tel:630215858" class="block text-2xl font-bold text-gray-900 hover:text-blue-700 mb-1">630 215 858</a>
+                                <a href="tel:914073028" class="block text-xl font-bold text-gray-900 hover:text-blue-700">91 407 30 28</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center mr-5 bg-frostCyan text-white"><i class="fas fa-envelope text-xl"></i></div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Escríbenos</p>
+                                <a href="mailto:nowdisespana@mail.com" class="text-lg font-bold text-gray-900 hover:text-blue-700">nowdisespana@mail.com</a>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div className="flex items-start mb-3">
-                       <div className="mt-1.5 mr-3 flex-shrink-0">
-                         <span className="flex h-3 w-3 relative">
-                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                           <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                         </span>
-                       </div>
-                       <p className="text-white font-bold text-lg leading-tight">
-                         {language === 'es' ? "Desplazamiento GRATIS" : "FREE Call-out"}
-                       </p>
+                    <div class="w-full md:w-1/2 bg-gray-50 rounded-2xl p-8 shadow-sm border border-gray-200 relative overflow-hidden">
+                        <div id="form-success" class="hidden absolute inset-0 bg-white flex flex-col items-center justify-center text-center p-8 z-10">
+                            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                                <i class="fas fa-check-circle text-4xl text-green-500"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">¡Solicitud Enviada!</h3>
+                            <p class="text-gray-600 mb-6">Hemos recibido tus datos. Un técnico te llamará en breve.</p>
+                            <button onclick="resetForm()" class="text-blue-600 font-bold hover:underline">Volver</button>
+                        </div>
+
+                        <form id="contact-form" onsubmit="submitForm(event)" class="space-y-5">
+                            <input required type="text" placeholder="Nombre completo" class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none">
+                            <input required type="tel" placeholder="Teléfono de contacto" class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none">
+                            <select required class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none bg-white">
+                                <option value="">Selecciona el aparato averiado</option>
+                                <option value="Lavadoras">Lavadora</option>
+                                <option value="Frigorificos">Frigorífico</option>
+                                <option value="Aire">Aire Acondicionado</option>
+                                <option value="Lavavajillas">Lavavajillas</option>
+                                <option value="Hornos">Horno / Vitrocerámica</option>
+                            </select>
+                            <button type="submit" class="w-full py-4 text-white font-bold rounded-md text-lg transition-all shadow-md mt-4 bg-electricOrange">Solicitar Asistencia</button>
+                        </form>
                     </div>
-                    
-                    <div className="bg-white/5 rounded-xl p-4 border border-white/10 mt-4">
-                      <p className="text-sm text-blue-100 leading-relaxed">
-                        {language === 'es' 
-                          ? "Solo se factura la localización de la avería si decides no realizar la reparación con nosotros."
-                          : "We only charge for the fault diagnosis if you decide not to proceed with the repair."}
-                      </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Botón Flotante WhatsApp -->
+    <a href="https://wa.me/34630215858" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:bg-[#128C7E] transition-all hover:scale-110 z-50 flex items-center justify-center animate-bounce-slow">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="text-white py-12 mt-auto bg-trustBlue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4 text-frostCyan">
+                        <i class="fas fa-wrench text-2xl mr-2"></i>
+                        <h2 class="font-bold text-xl tracking-tight text-white font-montserrat">NOWDIS ESPAÑA</h2>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white py-8 border-b border-gray-100 overflow-hidden">
-              <div className="max-w-7xl mx-auto px-4 text-center">
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">
-                  {language === 'es' ? "Reparamos las principales marcas" : "We repair top brands"}
-                </p>
-                <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale select-none">
-                  <span className="text-2xl font-black tracking-tighter">BOSCH</span>
-                  <span className="text-2xl font-bold tracking-widest">BALAY</span>
-                  <span className="text-2xl font-sans font-bold">SIEMENS</span>
-                  <span className="text-2xl font-serif font-bold italic">AEG</span>
-                  <span className="text-3xl font-black tracking-tighter">LG</span>
-                  <span className="text-2xl font-bold">SAMSUNG</span>
-                  <span className="text-2xl font-bold tracking-widest text-blue-800">Teka</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gray-50 py-20">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-16">
-                  <h2 className="text-3xl font-bold mb-4" style={{ color: colors.trustBlue }}>Lo que dicen nuestros clientes</h2>
-                  <div className="w-16 h-1 mx-auto" style={{ backgroundColor: colors.electricOrange }}></div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {[
-                    { name: "María González", loc: "Madrid Centro", txt: "Vinieron el mismo día que llamé. El técnico fue muy educado y arregló mi frigorífico en menos de una hora. Totalmente recomendables." },
-                    { name: "David Ruiz", loc: "Alcorcón", txt: "Me sorprendió que de verdad no cobraran desplazamiento. Presupuesto claro desde el principio para arreglar la lavadora." },
-                    { name: "Laura T.", loc: "Alcalá de Henares", txt: "Los llamé para una urgencia con el Aire Acondicionado en plena ola de calor. Rápidos, limpios y a un precio justo." }
-                  ].map((review, idx) => (
-                    <div key={idx} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                      <div className="flex text-yellow-400 mb-4">
-                        {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
-                      </div>
-                      <p className="text-gray-600 mb-6 italic">"{review.txt}"</p>
-                      <div>
-                        <p className="font-bold text-gray-900">{review.name}</p>
-                        <p className="text-sm text-gray-500">{review.loc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="py-20 bg-white border-t border-gray-100">
-              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12">
-                  <h2 className="text-3xl font-bold mb-4" style={{ color: colors.trustBlue }}>Preguntas Frecuentes (FAQ)</h2>
-                  <div className="w-16 h-1 mx-auto" style={{ backgroundColor: colors.electricOrange }}></div>
-                </div>
-                <div className="space-y-4">
-                  {faqs.map((faq, index) => (
-                    <div key={index} className="bg-gray-50 p-6 rounded-xl border border-gray-100">
-                      <h3 className="text-xl font-bold mb-3 flex items-start text-gray-800">
-                        <HelpCircle className="w-6 h-6 mr-3 flex-shrink-0" style={{ color: colors.frostCyan }} />
-                        {faq.q}
-                      </h3>
-                      <p className="text-gray-600 pl-9 leading-relaxed">{faq.a}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </>
-        );
-    }
-  };
-
-  return (
-    <div className="min-h-screen flex flex-col bg-gray-50 font-sans text-gray-800">
-      
-      {/* Top Contact Bar */}
-      <div className="hidden md:flex justify-between items-center px-8 py-2 text-sm text-white transition-colors" style={{ backgroundColor: colors.trustBlue }}>
-        <div className="flex items-center space-x-6">
-          <a href="tel:630215858" className="flex items-center hover:text-blue-200"><Phone className="w-4 h-4 mr-2" /> 630 215 858 / 91 407 30 28</a>
-          <a href="mailto:nowdisespana@mail.com" className="flex items-center hover:text-blue-200"><Mail className="w-4 h-4 mr-2" /> nowdisespana@mail.com</a>
-        </div>
-        <div className="flex items-center space-x-6">
-          <span className="flex items-center"><Clock className="w-4 h-4 mr-2" /> {language === 'es' ? "Servicio Técnico desde 1995" : "Est. 1995"}</span>
-          <button 
-            onClick={() => setLanguage(l => l === 'es' ? 'en' : 'es')} 
-            className="flex items-center bg-white/10 px-3 py-1 rounded-full hover:bg-white/20 transition-colors"
-          >
-            <Globe className="w-4 h-4 mr-1" /> {language === 'es' ? "EN" : "ES"}
-          </button>
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <nav className="bg-white shadow-sm sticky top-0 z-40 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-20">
-            <div className="flex items-center">
-              {/* Logo */}
-              <div className="flex-shrink-0 flex items-center cursor-pointer" onClick={() => navigate('inicio')}>
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center mr-3" style={{ backgroundColor: colors.trustBlue }}>
-                  <Wrench className="w-6 h-6 text-white" />
+                    <p class="text-blue-200 text-sm mb-4 max-w-md">Servicio Técnico de Electrodomésticos en Madrid. Reparación de lavadoras, hornos, frigoríficos, vitrocerámicas y aire acondicionado.</p>
+                    <p class="text-sm text-blue-200"><strong>CIF:</strong> B-81244782</p>
                 </div>
                 <div>
-                  <h1 className="font-bold text-2xl tracking-tight" style={{ color: colors.trustBlue }}>NOWDIS</h1>
-                  <p className="text-xs font-semibold tracking-wider" style={{ color: colors.frostCyan }}>ESPAÑA S.L.</p>
+                    <h3 class="font-bold text-lg mb-4 border-b border-blue-700 pb-2">Enlaces</h3>
+                    <ul class="space-y-2 text-sm text-blue-200">
+                        <li><button onclick="navigate('inicio')" class="hover:text-white">Inicio</button></li>
+                        <li><button onclick="navigate('servicios')" class="hover:text-white">Servicios</button></li>
+                        <li><button onclick="navigate('zonas')" class="hover:text-white">Zonas en Madrid</button></li>
+                        <li><button onclick="navigate('nosotros')" class="hover:text-white">Nosotros</button></li>
+                    </ul>
                 </div>
-              </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4 border-b border-blue-700 pb-2">Contacto</h3>
+                    <ul class="space-y-2 text-sm text-blue-200">
+                        <li><a href="tel:630215858"><i class="fas fa-phone mr-2"></i>630 215 858</a></li>
+                        <li><a href="tel:914073028"><i class="fas fa-phone mr-2"></i>91 407 30 28</a></li>
+                        <li><a href="mailto:nowdisespana@mail.com"><i class="fas fa-envelope mr-2"></i>nowdisespana@mail.com</a></li>
+                    </ul>
+                </div>
             </div>
-            
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-              <button onClick={() => navigate('inicio')} className={`font-medium transition-colors ${currentPage === 'inicio' ? 'text-blue-800 border-b-2 border-blue-800' : 'text-gray-600 hover:text-blue-800'}`}>Inicio</button>
-              <button onClick={() => navigate('servicios')} className={`font-medium transition-colors ${currentPage === 'servicios' ? 'text-blue-800 border-b-2 border-blue-800' : 'text-gray-600 hover:text-blue-800'}`}>Servicios</button>
-              <button onClick={() => navigate('zonas')} className={`font-medium transition-colors ${currentPage === 'zonas' ? 'text-blue-800 border-b-2 border-blue-800' : 'text-gray-600 hover:text-blue-800'}`}>Zonas</button>
-              <button onClick={() => navigate('nosotros')} className={`font-medium transition-colors ${currentPage === 'nosotros' ? 'text-blue-800 border-b-2 border-blue-800' : 'text-gray-600 hover:text-blue-800'}`}>Nosotros</button>
-              <button onClick={() => navigate('blog')} className={`font-medium transition-colors ${currentPage === 'blog' || currentPage === 'post' ? 'text-blue-800 border-b-2 border-blue-800' : 'text-gray-600 hover:text-blue-800'}`}>Blog</button>
-              <button onClick={() => navigate('contacto')} className="px-6 py-2 rounded-md text-white font-bold transition-transform hover:scale-105" style={{ backgroundColor: colors.electricOrange }}>
-                {language === 'es' ? "Llama ahora" : "Call now"}
-              </button>
+            <div class="border-t border-blue-800 mt-8 pt-8 text-center text-sm text-blue-300">
+                <p>&copy; 2026 NOWDIS ESPAÑA S.L. Todos los derechos reservados.</p>
             </div>
-
-            {/* Mobile menu button */}
-            <div className="flex items-center md:hidden">
-              <button 
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-600 hover:text-gray-900 focus:outline-none"
-              >
-                {isMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
-              </button>
-            </div>
-          </div>
         </div>
+    </footer>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100 px-2 pt-2 pb-4 space-y-1 sm:px-3 shadow-lg absolute w-full left-0">
-            <button onClick={() => navigate('inicio')} className="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50">Inicio</button>
-            <button onClick={() => navigate('servicios')} className="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50">Servicios</button>
-            <button onClick={() => navigate('zonas')} className="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50">Zonas de Servicio</button>
-            <button onClick={() => navigate('nosotros')} className="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50">Nosotros</button>
-            <button onClick={() => navigate('blog')} className="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50">Blog</button>
+    <!-- Lógica JavaScript (Vanilla) -->
+    <script>
+        // Datos para generar contenido dinámico
+        const services = [
+            { name: 'Lavadoras', icon: 'fa-tint', desc: 'Solucionamos problemas de centrifugado, pérdidas de agua, fallos electrónicos.', probs: ['No desagua', 'Tambor no gira'] },
+            { name: 'Frigoríficos', icon: 'fa-snowflake', desc: 'Reparación de compresores, termostatos y recargas de gas.', probs: ['No enfría', 'Crea hielo'] },
+            { name: 'Aire Acondicionado', icon: 'fa-wind', desc: 'Mantenimiento, recarga de gas e instalación de splits.', probs: ['No enfría', 'Gotea agua'] },
+            { name: 'Lavavajillas', icon: 'fa-sink', desc: 'Desatascos y cambio de bombas de agua.', probs: ['No coge agua', 'No calienta'] },
+            { name: 'Hornos', icon: 'fa-fire', desc: 'Sustitución de resistencias y módulos de control.', probs: ['No calienta', 'Salta el diferencial'] }
+        ];
+
+        const areas = [
+            { r: "Madrid Capital", d: ["Centro", "Salamanca", "Chamartín", "Retiro"] },
+            { r: "Zona Sur", d: ["Móstoles", "Alcorcón", "Getafe", "Leganés"] },
+            { r: "Corredor del Henares", d: ["Alcalá de Henares", "Torrejón de Ardoz", "Coslada"] },
+            { r: "Zona Noroeste", d: ["Pozuelo", "Majadahonda", "Las Rozas"] }
+        ];
+
+        // Inicializar contenido dinámico al cargar
+        window.onload = () => {
+            // Render Servicios
+            const srvCont = document.getElementById('services-container');
+            services.forEach(s => {
+                srvCont.innerHTML += `
+                    <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all border border-gray-100 p-8 flex flex-col group">
+                        <div class="flex items-center mb-6">
+                            <div class="w-14 h-14 rounded-xl flex items-center justify-center mr-4 bg-blue-50 text-trustBlue">
+                                <i class="fas ${s.icon} text-2xl"></i>
+                            </div>
+                            <h2 class="text-xl font-bold">${s.name}</h2>
+                        </div>
+                        <p class="text-gray-600 mb-6 text-sm">${s.desc}</p>
+                        <div class="mt-auto bg-gray-50 p-4 rounded-lg">
+                            <p class="text-xs font-bold uppercase mb-2">Averías comunes:</p>
+                            ${s.probs.map(p => `<p class="text-sm text-gray-600"><i class="fas fa-circle text-[8px] text-electricOrange mr-1"></i> ${p}</p>`).join('')}
+                        </div>
+                        <button onclick="navigate('contacto')" class="mt-4 text-sm font-bold text-trustBlue text-left">Solicitar Técnico <i class="fas fa-chevron-right ml-1"></i></button>
+                    </div>`;
+            });
+
+            // Render Zonas
+            const zCont = document.getElementById('zones-container');
+            areas.forEach(a => {
+                zCont.innerHTML += `
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                        <h2 class="text-xl font-bold text-trustBlue mb-4 border-b pb-2"><i class="fas fa-map-marker-alt text-electricOrange mr-2"></i> ${a.r}</h2>
+                        <ul class="grid grid-cols-2 gap-2">
+                            ${a.d.map(dist => `<li class="text-sm text-gray-700"><i class="fas fa-check-circle text-green-500 mr-1"></i> ${dist}</li>`).join('')}
+                        </ul>
+                    </div>`;
+            });
+        };
+
+        // Navegación estilo SPA
+        function navigate(pageId) {
+            document.querySelectorAll('.page-section').forEach(el => {
+                el.classList.remove('active');
+                setTimeout(() => el.style.display = 'none', 300);
+            });
             
-            <div className="px-4 pt-4 pb-2 flex justify-between items-center border-t border-gray-100 mt-2">
-              <button onClick={() => setLanguage(l => l === 'es' ? 'en' : 'es')} className="flex items-center text-sm font-bold text-gray-600">
-                <Globe className="w-4 h-4 mr-1" /> {language === 'es' ? "Cambiar a Inglés" : "Switch to Spanish"}
-              </button>
-            </div>
-          </div>
-        )}
-      </nav>
+            const target = document.getElementById(pageId);
+            setTimeout(() => {
+                target.style.display = 'block';
+                // Trigger reflow
+                void target.offsetWidth; 
+                target.classList.add('active');
+            }, 300);
 
-      {/* Main Content Render */}
-      <main className={`flex-grow transition-opacity duration-300 ease-in-out ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
-        {renderPage()}
-      </main>
+            // Actualizar menú
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-trustBlue', 'border-b-2', 'border-trustBlue');
+                btn.classList.add('text-gray-600');
+            });
+            event.currentTarget.classList.remove('text-gray-600');
+            event.currentTarget.classList.add('text-trustBlue', 'border-b-2', 'border-trustBlue');
 
-      {/* BOTÓN FLOTANTE WHATSAPP (CRO) */}
-      <a 
-        href="https://wa.me/34630215858?text=Hola,%20necesito%20asistencia%20t%C3%A9cnica%20para%20un%20electrodom%C3%A9stico." 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:bg-[#128C7E] transition-all hover:scale-110 z-50 flex items-center justify-center animate-bounce"
-        aria-label="Contactar por WhatsApp"
-      >
-        <MessageCircle className="w-8 h-8 fill-current" />
-      </a>
+            document.getElementById('mobile-menu').classList.add('hidden');
+            window.scrollTo(0, 0);
+        }
 
-      {/* Footer */}
-      <footer className="text-white py-12 mt-auto" style={{ backgroundColor: colors.trustBlue }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="md:col-span-2">
-              <div className="flex items-center mb-4">
-                <Wrench className="w-6 h-6 mr-2" style={{ color: colors.frostCyan }} />
-                <h2 className="font-bold text-xl tracking-tight">NOWDIS ESPAÑA</h2>
-              </div>
-              <p className="text-blue-200 text-sm mb-4 max-w-md">
-                Servicio Técnico de Electrodomésticos en Madrid. Reparación de lavadoras, hornos, frigoríficos, vitrocerámicas y aire acondicionado.
-              </p>
-              <div className="text-xs text-blue-300 mb-4">
-                <strong>Cobertura:</strong> Madrid Centro, Móstoles, Alcalá de Henares, Getafe, Leganés, Alcorcón, Pozuelo, Las Rozas, Torrejón...
-              </div>
-              <p className="text-sm text-blue-200">
-                <strong>CIF:</strong> B-81244782
-              </p>
-            </div>
+        // Menú Móvil
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // Formulario simulación
+        function submitForm(e) {
+            e.preventDefault();
+            document.getElementById('contact-form').classList.add('hidden');
+            document.getElementById('form-success').classList.remove('hidden');
+        }
+        function resetForm() {
+            document.getElementById('contact-form').reset();
+            document.getElementById('contact-form').classList.remove('hidden');
+            document.getElementById('form-success').classList.add('hidden');
+        }
+
+        // Idioma (Inglés/Español básico)
+        let isEnglish = false;
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            document.getElementById('lang-btn-text').innerText = isEnglish ? 'ES' : 'EN';
             
-            <div>
-              <h3 className="font-bold text-lg mb-4 border-b border-blue-700 pb-2">Enlaces Rápidos</h3>
-              <ul className="space-y-2 text-sm text-blue-200">
-                <li><button onClick={() => navigate('inicio')} className="hover:text-white transition-colors">Inicio</button></li>
-                <li><button onClick={() => navigate('servicios')} className="hover:text-white transition-colors">Servicios</button></li>
-                <li><button onClick={() => navigate('zonas')} className="hover:text-white transition-colors">Zonas en Madrid</button></li>
-                <li><button onClick={() => navigate('nosotros')} className="hover:text-white transition-colors">Nosotros</button></li>
-                <li><button onClick={() => navigate('blog')} className="hover:text-white transition-colors">Blog de Reparación</button></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-bold text-lg mb-4 border-b border-blue-700 pb-2">Contacto</h3>
-              <ul className="space-y-2 text-sm text-blue-200">
-                <li><a href="tel:630215858" className="hover:text-white transition-colors flex items-center"><Phone className="w-4 h-4 mr-2"/> 630 215 858</a></li>
-                <li><a href="tel:914073028" className="hover:text-white transition-colors flex items-center"><Phone className="w-4 h-4 mr-2"/> 91 407 30 28</a></li>
-                <li><a href="mailto:nowdisespana@mail.com" className="hover:text-white transition-colors flex items-center mt-2"><Mail className="w-4 h-4 mr-2"/> nowdisespana@mail.com</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-blue-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-blue-300">
-            <p>&copy; {new Date().getFullYear()} NOWDIS ESPAÑA S.L. Todos los derechos reservados.</p>
-            <div className="flex space-x-4 mt-4 md:mt-0">
-              <span className="hover:text-white cursor-pointer transition-colors">Aviso Legal</span>
-              <span className="hover:text-white cursor-pointer transition-colors">Política de Privacidad</span>
-              <span className="hover:text-white cursor-pointer transition-colors">Cookies</span>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-}
+            document.querySelectorAll('.lang-es').forEach(el => {
+                isEnglish ? el.classList.add('hidden') : el.classList.remove('hidden');
+            });
+            document.querySelectorAll('.lang-en').forEach(el => {
+                isEnglish ? el.classList.remove('hidden') : el.classList.add('hidden');
+            });
+        }
+    </script>
+</body>
+</html>
