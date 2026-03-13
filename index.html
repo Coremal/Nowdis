@@ -3,19 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO OPTIMIZADO PARA INICIO -->
     <title>SAT Navalcarnero y Suroeste | Reparación de Electrodomésticos y Aire</title>
     <meta name="description" content="Servicio Técnico Multimarca en Navalcarnero, Brunete, Sevilla la Nueva y alrededores. Instalación de Aire Acondicionado y reparación de electrodomésticos.">
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración Tailwind -->
     <script>
-        tailwind.config = { theme: { extend: { colors: { trustBlue: '#1A4B84', frostCyan: '#00A8E8', electricOrange: '#FF6B35', steelGrey: '#4A4A4A', cleanWhite: '#FFFFFF' } } } }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        trustBlue: '#1A4B84',
+                        frostCyan: '#00A8E8',
+                        electricOrange: '#FF6B35',
+                        steelGrey: '#4A4A4A',
+                        cleanWhite: '#FFFFFF'
+                    }
+                }
+            }
+        }
     </script>
+
+    <!-- FontAwesome y Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <style>
         body { font-family: 'Open Sans', sans-serif; }
         h1, h2, h3, h4, h5, h6, .font-montserrat { font-family: 'Montserrat', sans-serif; }
-        @keyframes bounce-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        
+        @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
         .animate-bounce-slow { animation: bounce-slow 3s infinite; }
     </style>
 </head>
@@ -29,8 +53,8 @@
         </div>
         <div class="flex items-center space-x-6">
             <span class="flex items-center lang-es"><i class="fas fa-map-marker-alt mr-2"></i> Navalcarnero, Brunete y Zona Suroeste</span>
-            <span class="flex items-center lang-en hidden"><i class="fas fa-map-marker-alt mr-2"></i> Serving Navalcarnero & Southwest</span>
-            <button onclick="toggleLanguage()" class="flex items-center bg-white/10 px-3 py-1 rounded-full hover:bg-white/20 transition-colors">
+            <span class="flex items-center lang-en hidden"><i class="fas fa-map-marker-alt mr-2"></i> Serving Navalcarnero & Southwest Madrid</span>
+            <button onclick="toggleLanguage()" class="flex items-center bg-white/10 px-3 py-1 rounded-full hover:bg-white/20 transition-colors cursor-pointer">
                 <i class="fas fa-globe mr-1"></i> <span id="lang-btn-text">EN</span>
             </button>
         </div>
@@ -52,24 +76,25 @@
                     </a>
                 </div>
                 
-                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
-                    <a href="index.html" class="font-medium transition-colors text-trustBlue border-b-2 border-trustBlue">Inicio</a>
-                    <a href="servicios.html" class="font-medium transition-colors text-gray-600 hover:text-trustBlue">Servicios</a>
-                    <a href="zonas.html" class="font-medium transition-colors text-gray-600 hover:text-trustBlue">Zonas</a>
-                    <a href="nosotros.html" class="font-medium transition-colors text-gray-600 hover:text-trustBlue">Nosotros</a>
-                    <a href="blog.html" class="font-medium transition-colors text-gray-600 hover:text-trustBlue">Blog</a>
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8" id="desktop-menu">
+                    <a href="index.html" class="nav-btn font-medium transition-colors text-trustBlue border-b-2 border-trustBlue">Inicio</a>
+                    <a href="servicios.html" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue">Servicios</a>
+                    <a href="zonas.html" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue">Zonas</a>
+                    <a href="nosotros.html" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue">Nosotros</a>
+                    <a href="blog.html" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue">Blog</a>
                     <a href="contacto.html" class="px-6 py-2 rounded-md text-white font-bold transition-transform hover:scale-105 bg-electricOrange lang-es">Llama ahora</a>
                     <a href="contacto.html" class="px-6 py-2 rounded-md text-white font-bold transition-transform hover:scale-105 bg-electricOrange lang-en hidden">Call now</a>
                 </div>
 
                 <div class="flex items-center md:hidden">
                     <button onclick="toggleMobileMenu()" class="text-gray-600 hover:text-gray-900 focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
+                        <i class="fas fa-bars text-2xl" id="menu-icon"></i>
                     </button>
                 </div>
             </div>
         </div>
 
+        <!-- Menú Móvil -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-2 pt-2 pb-4 space-y-1 shadow-lg absolute w-full left-0">
             <a href="index.html" class="block w-full text-left px-4 py-3 text-base font-medium text-trustBlue bg-blue-50 border-b border-gray-50">Inicio</a>
             <a href="servicios.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50">Servicios</a>
@@ -80,8 +105,9 @@
         </div>
     </nav>
 
-    <!-- CONTENIDO PRINCIPAL -->
+    <!-- MAIN CONTENT - INICIO -->
     <main class="flex-grow relative">
+        <!-- HERO -->
         <div class="relative text-white overflow-hidden bg-trustBlue">
             <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#ffffff 2px, transparent 2px); background-size: 30px 30px;"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 relative z-10 flex flex-col md:flex-row items-center">
@@ -153,6 +179,7 @@
             </div>
         </div>
 
+        <!-- MARCAS -->
         <div class="bg-white py-8 border-b border-gray-100 overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 text-center">
                 <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6 lang-es">Servicio Multimarca Especializado</p>
@@ -168,11 +195,11 @@
             </div>
         </div>
 
+        <!-- TESTIMONIOS -->
         <div class="bg-gray-50 py-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl font-bold mb-4 text-trustBlue font-montserrat lang-es">Vecinos que ya confían en nosotros</h2>
-                    <h2 class="text-3xl font-bold mb-4 text-trustBlue font-montserrat lang-en hidden">Neighbors who trust us</h2>
+                    <h2 class="text-3xl font-bold mb-4 text-trustBlue font-montserrat">Vecinos que ya confían en nosotros</h2>
                     <div class="w-16 h-1 mx-auto bg-electricOrange"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -241,17 +268,30 @@
         </div>
     </footer>
 
-    <!-- Lógica JS (Común a todas) -->
+    <!-- Lógica JS (Idioma y Menú) -->
     <script>
-        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // Sistema de Idiomas con LocalStorage
         let isEnglish = localStorage.getItem('nowdis_lang') === 'en';
+        
         function applyLanguage() {
             document.getElementById('lang-btn-text').innerText = isEnglish ? 'ES' : 'EN';
             document.querySelectorAll('.lang-es').forEach(el => isEnglish ? el.classList.add('hidden') : el.classList.remove('hidden'));
             document.querySelectorAll('.lang-en').forEach(el => isEnglish ? el.classList.remove('hidden') : el.classList.add('hidden'));
         }
-        function toggleLanguage() { isEnglish = !isEnglish; localStorage.setItem('nowdis_lang', isEnglish ? 'en' : 'es'); applyLanguage(); }
-        window.onload = applyLanguage;
+
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            localStorage.setItem('nowdis_lang', isEnglish ? 'en' : 'es');
+            applyLanguage();
+        }
+
+        window.onload = () => {
+            applyLanguage();
+        };
     </script>
 </body>
 </html>
