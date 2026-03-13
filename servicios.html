@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios de Reparación e Instalación | NOWDIS Suroeste</title>
+    <meta name="description" content="Reparación de lavadoras, frigoríficos, hornos y lavavajillas. Instalación de aire acondicionado en Navalcarnero y zona sur. Diagnóstico gratis si reparas.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { trustBlue: '#1A4B84', frostCyan: '#00A8E8', electricOrange: '#FF6B35', steelGrey: '#4A4A4A', cleanWhite: '#FFFFFF' } } } }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Open Sans', sans-serif; } h1, h2, h3, h4, h5, h6, .font-montserrat { font-family: 'Montserrat', sans-serif; }</style>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-50 text-gray-800">
+
+    <!-- Top Contact Bar -->
+    <div class="hidden md:flex justify-between items-center px-8 py-2 text-sm text-white transition-colors bg-trustBlue">
+        <div class="flex items-center space-x-6">
+            <a href="tel:630215858" class="flex items-center hover:text-blue-200"><i class="fas fa-phone mr-2"></i> 630 215 858 / 91 407 30 28</a>
+        </div>
+        <div class="flex items-center space-x-6">
+            <span class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> Navalcarnero, Brunete y Zona Suroeste</span>
+            <button onclick="toggleLanguage()" class="flex items-center bg-white/10 px-3 py-1 rounded-full hover:bg-white/20 transition-colors">
+                <i class="fas fa-globe mr-1"></i> <span id="lang-btn-text">EN</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-trustBlue"><i class="fas fa-wrench text-white text-xl"></i></div>
+                        <div><h1 class="font-bold text-2xl tracking-tight text-trustBlue font-montserrat">NOWDIS</h1></div>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+                    <a href="index.html" class="font-medium transition-colors text-gray-600 hover:text-trustBlue">Inicio</a>
+                    <!-- CLASE ACTIVA AQUI -->
+                    <a href="servicios.html" class="font-medium transition-colors text-trustBlue border-b-2 border-trustBlue">Servicios</a>
+                    <a href="zonas.html" class="font-medium transition-colors text-gray-600 hover:text-trustBlue">Zonas</a>
+                    <a href="nosotros.html" class="font-medium transition-colors text-gray-600 hover:text-trustBlue">Nosotros</a>
+                    <a href="blog.html" class="font-medium transition-colors text-gray-600 hover:text-trustBlue">Blog</a>
+                    <a href="contacto.html" class="px-6 py-2 rounded-md text-white font-bold transition-transform hover:scale-105 bg-electricOrange lang-es">Llama ahora</a>
+                </div>
+                <div class="flex items-center md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gray-600 hover:text-gray-900 focus:outline-none"><i class="fas fa-bars text-2xl"></i></button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-2 pt-2 pb-4 space-y-1 shadow-lg absolute w-full left-0">
+            <a href="index.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50">Inicio</a>
+            <a href="servicios.html" class="block w-full text-left px-4 py-3 text-base font-medium text-trustBlue bg-blue-50 border-b border-gray-50">Servicios</a>
+            <a href="contacto.html" class="block w-full text-center px-4 py-3 mt-4 text-base font-bold text-white rounded-md bg-electricOrange">Contactar</a>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-grow bg-gray-50">
+        <div class="bg-white py-16 border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-6 text-trustBlue font-montserrat lang-es">Servicios de Instalación y Reparación</h1>
+                <div class="w-24 h-1 mx-auto mb-6 bg-electricOrange"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8 lang-es">
+                    Soluciones multimarca para tu hogar. Si reparas con nosotros, <strong>el diagnóstico es 100% gratuito</strong>.
+                </p>
+            </div>
+        </div>
+        
+        <div class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Servicio 1 -->
+                <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all border border-gray-100 p-8 flex flex-col group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 rounded-xl flex items-center justify-center mr-4 bg-blue-50 text-trustBlue"><i class="fas fa-wind text-2xl"></i></div>
+                        <h2 class="text-xl font-bold font-montserrat text-trustBlue">Aire Acondicionado</h2>
+                    </div>
+                    <p class="text-gray-600 mb-6 text-sm"><strong>Instalación de equipos nuevos y reparación.</strong> Mantenimiento, recargas de gas e instalación de splits mural y por conductos.</p>
+                    <div class="mt-auto bg-gray-50 p-4 rounded-lg">
+                        <p class="text-sm font-semibold text-gray-700"><i class="fas fa-check text-[10px] text-green-500 mr-2"></i> Instalación nueva</p>
+                        <p class="text-sm font-semibold text-gray-700"><i class="fas fa-check text-[10px] text-green-500 mr-2"></i> No enfría</p>
+                    </div>
+                    <a href="contacto.html" class="mt-4 text-sm font-bold text-electricOrange hover:text-orange-600 inline-block">Contactar <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <!-- Servicio 2 -->
+                <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all border border-gray-100 p-8 flex flex-col group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 rounded-xl flex items-center justify-center mr-4 bg-blue-50 text-trustBlue"><i class="fas fa-tint text-2xl"></i></div>
+                        <h2 class="text-xl font-bold font-montserrat text-trustBlue">Lavadoras y Secadoras</h2>
+                    </div>
+                    <p class="text-gray-600 mb-6 text-sm">Solucionamos problemas de centrifugado, pérdidas de agua, fallos electrónicos y bloqueos.</p>
+                    <div class="mt-auto bg-gray-50 p-4 rounded-lg">
+                        <p class="text-sm font-semibold text-gray-700"><i class="fas fa-check text-[10px] text-green-500 mr-2"></i> No desagua</p>
+                        <p class="text-sm font-semibold text-gray-700"><i class="fas fa-check text-[10px] text-green-500 mr-2"></i> Tambor no gira</p>
+                    </div>
+                    <a href="contacto.html" class="mt-4 text-sm font-bold text-electricOrange hover:text-orange-600 inline-block">Contactar <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <!-- Servicio 3 -->
+                <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all border border-gray-100 p-8 flex flex-col group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 rounded-xl flex items-center justify-center mr-4 bg-blue-50 text-trustBlue"><i class="fas fa-snowflake text-2xl"></i></div>
+                        <h2 class="text-xl font-bold font-montserrat text-trustBlue">Frigoríficos</h2>
+                    </div>
+                    <p class="text-gray-600 mb-6 text-sm">Reparación de compresores, termostatos y recargas de gas refrigerante.</p>
+                    <div class="mt-auto bg-gray-50 p-4 rounded-lg">
+                        <p class="text-sm font-semibold text-gray-700"><i class="fas fa-check text-[10px] text-green-500 mr-2"></i> No enfría</p>
+                        <p class="text-sm font-semibold text-gray-700"><i class="fas fa-check text-[10px] text-green-500 mr-2"></i> Crea mucho hielo</p>
+                    </div>
+                    <a href="contacto.html" class="mt-4 text-sm font-bold text-electricOrange hover:text-orange-600 inline-block">Contactar <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <!-- Servicio 4 -->
+                <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all border border-gray-100 p-8 flex flex-col group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 rounded-xl flex items-center justify-center mr-4 bg-blue-50 text-trustBlue"><i class="fas fa-fire text-2xl"></i></div>
+                        <h2 class="text-xl font-bold font-montserrat text-trustBlue">Hornos y Vitros</h2>
+                    </div>
+                    <p class="text-gray-600 mb-6 text-sm">Sustitución de resistencias, placas de inducción y módulos de control.</p>
+                    <div class="mt-auto bg-gray-50 p-4 rounded-lg">
+                        <p class="text-sm font-semibold text-gray-700"><i class="fas fa-check text-[10px] text-green-500 mr-2"></i> No calienta</p>
+                        <p class="text-sm font-semibold text-gray-700"><i class="fas fa-check text-[10px] text-green-500 mr-2"></i> Salta el diferencial</p>
+                    </div>
+                    <a href="contacto.html" class="mt-4 text-sm font-bold text-electricOrange hover:text-orange-600 inline-block">Contactar <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <!-- Servicio 5 -->
+                <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all border border-gray-100 p-8 flex flex-col group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 rounded-xl flex items-center justify-center mr-4 bg-blue-50 text-trustBlue"><i class="fas fa-sink text-2xl"></i></div>
+                        <h2 class="text-xl font-bold font-montserrat text-trustBlue">Lavavajillas</h2>
+                    </div>
+                    <p class="text-gray-600 mb-6 text-sm">Desatascos, cambio de bombas de agua y reparación de placas electrónicas.</p>
+                    <div class="mt-auto bg-gray-50 p-4 rounded-lg">
+                        <p class="text-sm font-semibold text-gray-700"><i class="fas fa-check text-[10px] text-green-500 mr-2"></i> No coge agua</p>
+                        <p class="text-sm font-semibold text-gray-700"><i class="fas fa-check text-[10px] text-green-500 mr-2"></i> No calienta</p>
+                    </div>
+                    <a href="contacto.html" class="mt-4 text-sm font-bold text-electricOrange hover:text-orange-600 inline-block">Contactar <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-white py-12 mt-auto bg-trustBlue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-blue-300">
+            <p>&copy; 2026 NOWDIS ESPAÑA S.L. SAT Multimarca Madrid Suroeste.</p>
+        </div>
+    </footer>
+    <script>
+        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+        let isEnglish = localStorage.getItem('nowdis_lang') === 'en';
+        function applyLanguage() {
+            document.querySelectorAll('.lang-es').forEach(el => isEnglish ? el.classList.add('hidden') : el.classList.remove('hidden'));
+            document.querySelectorAll('.lang-en').forEach(el => isEnglish ? el.classList.remove('hidden') : el.classList.add('hidden'));
+        }
+        window.onload = applyLanguage;
+    </script>
+</body>
+</html>
