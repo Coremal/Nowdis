@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog y Consejos de Electrodomésticos | NOWDIS</title>
-    <meta name="description" content="Consejos y guías para el mantenimiento de tu lavadora, frigorífico y aire acondicionado.">
+    <title>Blog y Consejos de Electrodomésticos | NOWDIS Suroeste</title>
+    <meta name="description" content="Consejos y guías de mantenimiento de nuestros técnicos en Navalcarnero para tu lavadora, frigorífico y aire acondicionado.">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config={theme:{extend:{colors:{trustBlue:'#1A4B84',frostCyan:'#00A8E8',electricOrange:'#FF6B35'}}}}</script>
@@ -13,6 +13,20 @@
     <style>body { font-family: 'Open Sans', sans-serif; } h1, h2, h3, h4, h5, h6, .font-montserrat { font-family: 'Montserrat', sans-serif; }</style>
 </head>
 <body class="min-h-screen flex flex-col bg-gray-50 text-gray-800">
+    <!-- Top Contact Bar -->
+    <div class="hidden md:flex justify-between items-center px-8 py-2 text-sm text-white transition-colors bg-trustBlue">
+        <div class="flex items-center space-x-6">
+            <a href="tel:630215858" class="flex items-center hover:text-blue-200"><i class="fas fa-phone mr-2"></i> 630 215 858</a>
+        </div>
+        <div class="flex items-center space-x-6">
+            <span class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> Navalcarnero y Zona Suroeste</span>
+            <button onclick="toggleLanguage()" class="flex items-center bg-white/10 px-3 py-1 rounded-full hover:bg-white/20 transition-colors">
+                <i class="fas fa-globe mr-1"></i> <span id="lang-btn-text">EN</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Navegación -->
     <nav class="bg-white shadow-sm sticky top-0 z-40 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20">
@@ -30,37 +44,81 @@
                     <a href="blog.html" class="font-medium transition-colors text-trustBlue border-b-2 border-trustBlue">Blog</a>
                     <a href="contacto.html" class="px-6 py-2 rounded-md text-white font-bold transition-transform hover:scale-105 bg-electricOrange">Llama ahora</a>
                 </div>
+                <div class="flex items-center md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gray-600 hover:text-gray-900 focus:outline-none"><i class="fas fa-bars text-2xl"></i></button>
+                </div>
             </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-2 pt-2 pb-4 space-y-1 shadow-lg absolute w-full left-0">
+            <a href="index.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50">Inicio</a>
+            <a href="servicios.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50">Servicios</a>
+            <a href="blog.html" class="block w-full text-left px-4 py-3 text-base font-medium text-trustBlue bg-blue-50 border-b border-gray-50">Blog</a>
+            <a href="contacto.html" class="block w-full text-center px-4 py-3 mt-4 text-base font-bold text-white rounded-md bg-electricOrange">Contactar</a>
         </div>
     </nav>
 
+    <!-- Contenido Principal -->
     <main class="flex-grow bg-gray-50">
         <div class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h1 class="text-3xl md:text-4xl font-bold mb-4 text-trustBlue font-montserrat">Consejos de Mantenimiento</h1>
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 text-trustBlue font-montserrat">Blog de Reparación y Mantenimiento</h1>
                 <div class="w-24 h-1 mx-auto mb-6 bg-electricOrange"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Trucos y guías de nuestros técnicos locales para alargar la vida útil de tus electrodomésticos.</p>
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Blog Item -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <span class="text-xs font-bold text-frostCyan uppercase">Aire Acondicionado</span>
-                    <h2 class="text-xl font-bold mt-2 mb-3">¿Cuándo hacer la recarga de gas del aire?</h2>
-                    <p class="text-gray-600 text-sm mb-4">Si notas que tu equipo no enfría como el primer día o el compresor no para, es hora de una revisión. Te explicamos por qué ocurre.</p>
+                <!-- Artículo 1 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md transition-shadow">
+                    <div class="p-6 flex-grow flex flex-col">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold text-frostCyan uppercase bg-blue-50 px-2 py-1 rounded">Aire Acondicionado</span>
+                            <span class="text-xs text-gray-400">12 Mar 2026</span>
+                        </div>
+                        <h2 class="text-xl font-bold mt-2 mb-3 text-gray-800">¿Cuándo hacer la recarga de gas del aire acondicionado?</h2>
+                        <p class="text-gray-600 text-sm mb-6 flex-grow">Si notas que tu equipo no enfría como el primer día o el compresor no para, es hora de una revisión. Te explicamos los síntomas clave.</p>
+                        <a href="blog-recarga-gas-aire.html" class="text-sm font-bold text-electricOrange hover:text-orange-600">Leer artículo completo <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
                 </div>
-                <!-- Blog Item -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <span class="text-xs font-bold text-frostCyan uppercase">Lavadoras</span>
-                    <h2 class="text-xl font-bold mt-2 mb-3">Limpieza del filtro de la lavadora</h2>
-                    <p class="text-gray-600 text-sm mb-4">Un mantenimiento básico que puedes hacer tú mismo para evitar bloqueos en la bomba de agua y visitas innecesarias del técnico.</p>
+
+                <!-- Artículo 2 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md transition-shadow">
+                    <div class="p-6 flex-grow flex flex-col">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold text-frostCyan uppercase bg-blue-50 px-2 py-1 rounded">Lavadoras</span>
+                            <span class="text-xs text-gray-400">05 Feb 2026</span>
+                        </div>
+                        <h2 class="text-xl font-bold mt-2 mb-3 text-gray-800">Cómo limpiar el filtro de la lavadora paso a paso</h2>
+                        <p class="text-gray-600 text-sm mb-6 flex-grow">Un mantenimiento básico que puedes hacer tú mismo para evitar bloqueos en la bomba de agua, malos olores y visitas del técnico.</p>
+                        <a href="blog-limpiar-filtro-lavadora.html" class="text-sm font-bold text-electricOrange hover:text-orange-600">Leer artículo completo <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Artículo 3 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-md transition-shadow">
+                    <div class="p-6 flex-grow flex flex-col">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold text-frostCyan uppercase bg-blue-50 px-2 py-1 rounded">Frigoríficos</span>
+                            <span class="text-xs text-gray-400">18 Ene 2026</span>
+                        </div>
+                        <h2 class="text-xl font-bold mt-2 mb-3 text-gray-800">Por qué mi frigorífico no enfría y qué hacer</h2>
+                        <p class="text-gray-600 text-sm mb-6 flex-grow">Desde juntas desgastadas hasta fallos en el compresor. Repasamos las causas principales por las que tu nevera deja de enfriar los alimentos.</p>
+                        <a href="blog-frigorifico-no-enfria.html" class="text-sm font-bold text-electricOrange hover:text-orange-600">Leer artículo completo <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- Footer Compartido -->
     <footer class="text-white py-12 mt-auto bg-trustBlue">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-blue-300">
-            <p>&copy; 2026 NOWDIS ESPAÑA S.L.</p>
+            <p>&copy; 2026 NOWDIS ESPAÑA S.L. SAT Multimarca Madrid Suroeste.</p>
         </div>
     </footer>
+    <script>
+        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+        let isEnglish = localStorage.getItem('nowdis_lang') === 'en';
+        function toggleLanguage() { isEnglish = !isEnglish; localStorage.setItem('nowdis_lang', isEnglish ? 'en' : 'es'); location.reload(); }
+    </script>
 </body>
 </html>
