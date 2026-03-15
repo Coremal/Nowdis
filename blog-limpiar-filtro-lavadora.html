@@ -4,15 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cómo limpiar el filtro de la lavadora paso a paso | NOWDIS</title>
-    <meta name="description" content="Guía paso a paso para limpiar el filtro de tu lavadora. Evita malos olores y que la lavadora no desagüe. SAT Navalcarnero.">
+    <meta name="description" content="Guía paso a paso para limpiar el filtro de tu lavadora. Evita malos olores y problemas de vaciado de agua.">
+    
+    <link rel="canonical" href="https://xn--nowdisespaa-beb.es/blog-limpiar-filtro-lavadora.html" />
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config={theme:{extend:{colors:{trustBlue:'#1A4B84',frostCyan:'#00A8E8',electricOrange:'#FF6B35'}}}}</script>
+    <script>tailwind.config = { theme: { extend: { colors: { trustBlue: '#1A4B84', frostCyan: '#00A8E8', electricOrange: '#FF6B35' } } } }</script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Open Sans', sans-serif; } h1, h2, h3, h4, h5, h6, .font-montserrat { font-family: 'Montserrat', sans-serif; }</style>
+    <style>body { font-family: 'Open Sans', sans-serif; } h1, h2, h3, h4, .font-montserrat { font-family: 'Montserrat', sans-serif; }</style>
 </head>
 <body class="min-h-screen flex flex-col bg-gray-50 text-gray-800">
     
+    <div class="hidden md:flex justify-between items-center px-8 py-2 text-sm text-white bg-trustBlue">
+        <div class="flex items-center space-x-6">
+            <a href="tel:630215858" class="flex items-center hover:text-blue-200"><i class="fas fa-phone mr-2"></i> 630 215 858</a>
+        </div>
+        <div class="flex items-center space-x-6">
+            <button onclick="toggleLanguage()" class="flex items-center bg-white/10 px-3 py-1 rounded-full hover:bg-white/20 transition-colors">
+                <i class="fas fa-globe mr-1"></i> <span id="lang-btn-text">EN</span>
+            </button>
+        </div>
+    </div>
+
     <nav class="bg-white shadow-sm sticky top-0 z-40 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
@@ -20,7 +34,9 @@
                     <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-trustBlue"><i class="fas fa-wrench text-white"></i></div>
                     <h1 class="font-bold text-2xl text-trustBlue font-montserrat">NOWDIS</h1>
                 </a>
-                <a href="blog.html" class="text-gray-500 hover:text-trustBlue font-medium"><i class="fas fa-arrow-left mr-2"></i>Volver</a>
+                <a href="blog.html" class="text-gray-500 hover:text-trustBlue font-medium transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i><span class="lang-es">Volver al Blog</span><span class="lang-en hidden">Back to Blog</span>
+                </a>
             </div>
         </div>
     </nav>
@@ -28,48 +44,81 @@
     <main class="flex-grow bg-white py-16">
         <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-8">
-                <span class="text-xs font-bold text-frostCyan uppercase bg-blue-50 px-3 py-1 rounded-full mr-3">Lavadoras</span>
+                <span class="text-xs font-bold text-frostCyan uppercase bg-blue-50 px-3 py-1 rounded-full mr-3 lang-es">Lavadoras</span>
+                <span class="text-xs font-bold text-frostCyan uppercase bg-blue-50 px-3 py-1 rounded-full mr-3 lang-en hidden">Washers</span>
                 <span class="text-sm text-gray-500">05 Feb 2026</span>
             </div>
             
-            <h1 class="text-3xl md:text-5xl font-extrabold mb-8 text-trustBlue font-montserrat leading-tight">Cómo limpiar el filtro de la lavadora correctamente</h1>
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-8 text-trustBlue font-montserrat leading-tight lang-es">Cómo limpiar el filtro de la lavadora correctamente</h1>
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-8 text-trustBlue font-montserrat leading-tight lang-en hidden">How to properly clean the washing machine filter</h1>
             
             <div class="w-full h-64 bg-gray-100 rounded-xl mb-10 flex items-center justify-center border border-gray-200">
                 <i class="fas fa-tint text-5xl text-gray-300"></i>
-                <span class="sr-only">[Imagen de un filtro de lavadora]</span>
             </div>
 
             <div class="prose prose-lg max-w-none text-gray-700 space-y-6">
-                <p>Una de las averías por las que más nos llaman nuestros vecinos de Móstoles, Navalcarnero y Alcorcón es porque <strong>"la lavadora no tira el agua"</strong> o se para en mitad del programa. Muchas de estas averías se pueden prevenir con un mantenimiento sencillo: limpiar el filtro.</p>
+                <p class="lang-es">Una de las averías más comunes es que <strong>"la lavadora no tira el agua"</strong> o se para en mitad del programa. Muchas de estas averías se pueden prevenir con un mantenimiento muy sencillo: limpiar el filtro.</p>
+                <p class="lang-en hidden">One of the most common breakdowns is that <strong>"the washing machine won't drain"</strong> or it stops mid-cycle. Many of these issues can be prevented with very simple maintenance: cleaning the filter.</p>
                 
-                <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4">Paso a paso para la limpieza</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4 lang-es">Paso a paso para la limpieza</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4 lang-en hidden">Step-by-step cleaning guide</h2>
+                
                 <ol class="list-decimal pl-6 space-y-4">
-                    <li><strong>Desenchufa la lavadora:</strong> Seguridad ante todo. Desconecta el aparato de la corriente eléctrica.</li>
-                    <li><strong>Localiza el filtro:</strong> En el 95% de las marcas (Bosch, Balay, LG, Beko...), el filtro se encuentra en la parte inferior frontal, detrás de un pequeño zócalo embellecedor o una puertecita.</li>
-                    <li><strong>Prepara toallas y un recipiente:</strong> Al abrir el filtro siempre va a caer agua retenida. Coloca trapos debajo y, si es posible, una bandeja plana.</li>
-                    <li><strong>Desenrosca con cuidado:</strong> Gira la tapa del filtro en sentido contrario a las agujas del reloj. Hazlo poco a poco para dejar salir el agua.</li>
-                    <li><strong>Extrae y limpia:</strong> Saca la pieza de plástico entera. Aquí suele haber monedas, horquillas, pelusas y restos de jabón. Lávalo debajo del grifo con agua caliente y un cepillo viejo.</li>
-                    <li><strong>Mira dentro del hueco:</strong> Usa una linterna para mirar el hueco de la lavadora donde iba el filtro. Al fondo está el aspa de la bomba de desagüe. Asegúrate de que no haya nada enrollado en ella y que puede girar libremente.</li>
+                    <li>
+                        <strong class="lang-es">Desenchufa la lavadora:</strong><strong class="lang-en hidden">Unplug the washer:</strong>
+                        <span class="lang-es"> Seguridad ante todo. Desconecta el aparato de la corriente eléctrica.</span>
+                        <span class="lang-en hidden"> Safety first. Disconnect the appliance from the power supply.</span>
+                    </li>
+                    <li>
+                        <strong class="lang-es">Localiza el filtro:</strong><strong class="lang-en hidden">Locate the filter:</strong>
+                        <span class="lang-es"> Se suele encontrar en la parte inferior frontal, detrás de un pequeño zócalo embellecedor.</span>
+                        <span class="lang-en hidden"> It is usually found on the bottom front, behind a small baseboard cover.</span>
+                    </li>
+                    <li>
+                        <strong class="lang-es">Prepara toallas:</strong><strong class="lang-en hidden">Prepare towels:</strong>
+                        <span class="lang-es"> Al abrir el filtro siempre va a caer agua. Coloca trapos debajo.</span>
+                        <span class="lang-en hidden"> When you open the filter, water will always spill. Place rags underneath.</span>
+                    </li>
+                    <li>
+                        <strong class="lang-es">Extrae y limpia:</strong><strong class="lang-en hidden">Extract and clean:</strong>
+                        <span class="lang-es"> Saca la pieza girando a la izquierda. Lávala debajo del grifo quitando monedas o pelusas.</span>
+                        <span class="lang-en hidden"> Pull the piece out by turning left. Wash it under the tap removing coins or lint.</span>
+                    </li>
                 </ol>
 
-                <p>Vuelve a enroscar el filtro apretándolo firmemente para que no pierda agua en el siguiente lavado.</p>
-
-                <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4">¿Lo has limpiado y sigue sin desguar?</h2>
-                <p>Si el filtro está limpio pero la máquina sigue mostrando un error o no vacía el agua, es muy probable que la bomba de desagüe se haya quemado o exista una obstrucción grave en el manguito de cuba. En ese caso, es necesario intervenir la máquina.</p>
+                <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4 lang-es">¿Sigue sin desaguar?</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mt-8 mb-4 lang-en hidden">Still not draining?</h2>
+                
+                <p class="lang-es">Si el filtro está limpio pero la máquina sigue mostrando un error o no vacía el agua, es muy probable que la bomba de desagüe se haya quemado o exista una obstrucción grave interna.</p>
+                <p class="lang-en hidden">If the filter is clean but the machine still shows an error or doesn't drain the water, it's highly likely that the drain pump has burned out or there's a severe internal blockage.</p>
             </div>
 
             <div class="mt-16 p-8 bg-blue-50 rounded-2xl border border-blue-100 text-center">
-                <h3 class="text-2xl font-bold mb-4 text-trustBlue font-montserrat">Servicio Técnico Especializado en Lavadoras</h3>
-                <p class="text-gray-700 mb-6">Si la avería es compleja, llámanos. Nos desplazamos gratis a tu domicilio en el Suroeste de Madrid y elaboramos un presupuesto transparente.</p>
-                <a href="contacto.html" class="inline-block px-8 py-4 rounded-md text-white font-bold text-lg transition-transform hover:scale-105 bg-electricOrange shadow-md">
-                    Contactar con un Técnico
-                </a>
+                <h3 class="text-2xl font-bold mb-4 text-trustBlue font-montserrat lang-es">Servicio Técnico Especializado</h3>
+                <h3 class="text-2xl font-bold mb-4 text-trustBlue font-montserrat lang-en hidden">Specialized Technical Service</h3>
+                
+                <p class="text-gray-700 mb-6 lang-es">Si la avería es compleja, llámanos. Nos desplazamos gratis a tu domicilio en Madrid.</p>
+                <p class="text-gray-700 mb-6 lang-en hidden">If the breakdown is complex, call us. We travel for free to your home in Madrid.</p>
+                
+                <a href="contacto.html" class="inline-block px-8 py-4 rounded-md text-white font-bold text-lg transition-transform hover:scale-105 bg-electricOrange shadow-md lang-es">Contactar Técnico</a>
+                <a href="contacto.html" class="inline-block px-8 py-4 rounded-md text-white font-bold text-lg transition-transform hover:scale-105 bg-electricOrange shadow-md lang-en hidden">Contact Technician</a>
             </div>
         </article>
     </main>
 
     <footer class="text-white py-8 mt-auto bg-trustBlue text-center text-sm">
-        <p>&copy; 2026 NOWDIS ESPAÑA S.L. SAT Madrid Suroeste.</p>
+        <p>&copy; 2026 NOWDIS ESPAÑA S.L.</p>
     </footer>
+
+    <script>
+        let isEnglish = localStorage.getItem('nowdis_lang') === 'en';
+        function applyLanguage() {
+            document.getElementById('lang-btn-text').innerText = isEnglish ? 'ES' : 'EN';
+            document.querySelectorAll('.lang-es').forEach(el => isEnglish ? el.classList.add('hidden') : el.classList.remove('hidden'));
+            document.querySelectorAll('.lang-en').forEach(el => isEnglish ? el.classList.remove('hidden') : el.classList.add('hidden'));
+        }
+        function toggleLanguage() { isEnglish = !isEnglish; localStorage.setItem('nowdis_lang', isEnglish ? 'en' : 'es'); applyLanguage(); }
+        window.onload = applyLanguage;
+    </script>
 </body>
 </html>
