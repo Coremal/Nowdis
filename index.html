@@ -3,112 +3,365 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO OPTIMIZADO PARA INICIO -->
     <title>Reparación de Electrodomésticos en Madrid | NOWDIS</title>
     <meta name="description" content="Servicio Técnico Multimarca en toda la Comunidad de Madrid. Reparación de electrodomésticos e instalación de Aire Acondicionado. Desplazamiento gratuito.">
-    <!-- URL CANÓNICA OFICIAL -->
+    
+    <!-- URL CANÓNICA OFICIAL CON TU NUEVO DOMINIO -->
     <link rel="canonical" href="https://xn--nowdisespaa-beb.es/index.html" />
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config={theme:{extend:{colors:{trustBlue:'#1A4B84',frostCyan:'#00A8E8',electricOrange:'#FF6B35'}}}}</script>
+    
+    <!-- Configuración Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        trustBlue: '#1A4B84',
+                        frostCyan: '#00A8E8',
+                        electricOrange: '#FF6B35',
+                        steelGrey: '#4A4A4A',
+                        cleanWhite: '#FFFFFF'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome y Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Open Sans', sans-serif; } h1, h2, h3, h4, h5, h6, .font-montserrat { font-family: 'Montserrat', sans-serif; }</style>
+    
+    <style>
+        body { font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        @keyframes bounce-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .animate-bounce-slow { animation: bounce-slow 3s infinite; }
+    </style>
 </head>
 <body class="min-h-screen flex flex-col bg-gray-50 text-gray-800">
-    <div class="hidden md:flex justify-between items-center px-8 py-2 text-sm text-white bg-trustBlue">
-        <div class="flex items-center space-x-6"><a href="tel:630215858" class="flex items-center hover:text-blue-200"><i class="fas fa-phone mr-2"></i> 630 215 858</a></div>
+
+    <!-- Top Contact Bar -->
+    <div class="hidden md:flex justify-between items-center px-8 py-2 text-sm text-white transition-colors bg-trustBlue">
+        <div class="flex items-center space-x-6">
+            <a href="tel:630215858" class="flex items-center hover:text-blue-200"><i class="fas fa-phone mr-2"></i> 630 215 858 / 91 407 30 28</a>
+            <a href="mailto:nowdisespana@mail.com" class="flex items-center hover:text-blue-200"><i class="fas fa-envelope mr-2"></i> nowdisespana@mail.com</a>
+        </div>
         <div class="flex items-center space-x-6">
             <span class="flex items-center lang-es"><i class="fas fa-truck mr-2"></i> Desplazamiento Gratuito en Madrid</span>
             <span class="flex items-center lang-en hidden"><i class="fas fa-truck mr-2"></i> Free Call-out in Madrid</span>
-            <button onclick="toggleLanguage()" class="flex items-center bg-white/10 px-3 py-1 rounded-full hover:bg-white/20 transition-colors cursor-pointer"><i class="fas fa-globe mr-1"></i> <span id="lang-btn-text">EN</span></button>
+            <!-- Botón de Idioma -->
+            <button onclick="toggleLanguage()" class="flex items-center bg-white/10 px-3 py-1 rounded-full hover:bg-white/20 transition-colors cursor-pointer">
+                <i class="fas fa-globe mr-1"></i> <span id="lang-btn-text">EN</span>
+            </button>
         </div>
     </div>
+
+    <!-- Navegación -->
     <nav class="bg-white shadow-sm sticky top-0 z-40 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20">
                 <div class="flex items-center">
                     <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-trustBlue"><i class="fas fa-wrench text-white text-xl"></i></div>
-                        <div><h1 class="font-bold text-2xl tracking-tight text-trustBlue font-montserrat">NOWDIS</h1><p class="text-xs font-semibold tracking-wider text-frostCyan">ESPAÑA S.L.</p></div>
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 bg-trustBlue">
+                            <i class="fas fa-wrench text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="font-bold text-2xl tracking-tight text-trustBlue font-montserrat">NOWDIS</h1>
+                            <p class="text-xs font-semibold tracking-wider text-frostCyan">ESPAÑA S.L.</p>
+                        </div>
                     </a>
                 </div>
-                <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
-                    <a href="index.html" class="font-medium transition-colors text-trustBlue border-b-2 border-trustBlue">Inicio</a>
-                    <a href="servicios.html" class="font-medium transition-colors text-gray-600 hover:text-trustBlue">Servicios</a>
-                    <a href="zonas.html" class="font-medium transition-colors text-gray-600 hover:text-trustBlue">Zonas</a>
-                    <a href="nosotros.html" class="font-medium transition-colors text-gray-600 hover:text-trustBlue">Nosotros</a>
-                    <a href="blog.html" class="font-medium transition-colors text-gray-600 hover:text-trustBlue">Blog</a>
+                
+                <!-- Menú Escritorio -->
+                <div class="hidden md:flex items-center space-x-6 lg:space-x-8" id="desktop-menu">
+                    <a href="index.html" class="nav-btn font-medium transition-colors text-trustBlue border-b-2 border-trustBlue lang-es">Inicio</a>
+                    <a href="index.html" class="nav-btn font-medium transition-colors text-trustBlue border-b-2 border-trustBlue lang-en hidden">Home</a>
+                    
+                    <a href="servicios.html" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue lang-es">Servicios</a>
+                    <a href="servicios.html" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue lang-en hidden">Services</a>
+                    
+                    <a href="zonas.html" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue lang-es">Zonas</a>
+                    <a href="zonas.html" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue lang-en hidden">Areas</a>
+                    
+                    <a href="nosotros.html" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue lang-es">Nosotros</a>
+                    <a href="nosotros.html" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue lang-en hidden">About Us</a>
+                    
+                    <a href="blog.html" class="nav-btn font-medium transition-colors text-gray-600 hover:text-trustBlue">Blog</a>
+                    
                     <a href="contacto.html" class="px-6 py-2 rounded-md text-white font-bold transition-transform hover:scale-105 bg-electricOrange lang-es">Llama ahora</a>
                     <a href="contacto.html" class="px-6 py-2 rounded-md text-white font-bold transition-transform hover:scale-105 bg-electricOrange lang-en hidden">Call now</a>
                 </div>
-                <div class="flex items-center md:hidden"><button onclick="toggleMobileMenu()" class="text-gray-600 hover:text-gray-900 focus:outline-none"><i class="fas fa-bars text-2xl"></i></button></div>
+
+                <div class="flex items-center md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <i class="fas fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-2 pt-2 pb-4 space-y-1 shadow-lg absolute w-full left-0">
-            <a href="index.html" class="block w-full text-left px-4 py-3 text-base font-medium text-trustBlue bg-blue-50">Inicio</a>
-            <a href="servicios.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700">Servicios</a>
-            <a href="zonas.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700">Zonas</a>
-            <a href="nosotros.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700">Nosotros</a>
-            <a href="blog.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700">Blog</a>
-            <a href="contacto.html" class="block w-full text-center px-4 py-3 mt-4 text-base font-bold text-white rounded-md bg-electricOrange">Contactar</a>
+
+        <!-- Menú Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-2 pt-2 pb-4 space-y-1 shadow-lg absolute w-full left-0 z-50">
+            <a href="index.html" class="block w-full text-left px-4 py-3 text-base font-medium text-trustBlue bg-blue-50 border-b border-gray-50 lang-es">Inicio</a>
+            <a href="index.html" class="block w-full text-left px-4 py-3 text-base font-medium text-trustBlue bg-blue-50 border-b border-gray-50 lang-en hidden">Home</a>
+            
+            <a href="servicios.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50 lang-es">Servicios</a>
+            <a href="servicios.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50 lang-en hidden">Services</a>
+            
+            <a href="zonas.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50 lang-es">Zonas de Servicio</a>
+            <a href="zonas.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50 lang-en hidden">Service Areas</a>
+            
+            <a href="nosotros.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50 lang-es">Nosotros</a>
+            <a href="nosotros.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 border-b border-gray-50 lang-en hidden">About Us</a>
+            
+            <a href="blog.html" class="block w-full text-left px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50">Blog</a>
+            
+            <a href="contacto.html" class="block w-full text-center px-4 py-3 mt-4 text-base font-bold text-white rounded-md bg-electricOrange lang-es">Contactar</a>
+            <a href="contacto.html" class="block w-full text-center px-4 py-3 mt-4 text-base font-bold text-white rounded-md bg-electricOrange lang-en hidden">Contact</a>
         </div>
     </nav>
+
+    <!-- MAIN CONTENT - INICIO -->
     <main class="flex-grow relative">
+        <!-- HERO REVISADO -->
         <div class="relative text-white overflow-hidden bg-trustBlue">
+            <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#ffffff 2px, transparent 2px); background-size: 30px 30px;"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 relative z-10 flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 pr-0 md:pr-10">
-                    <div class="inline-flex items-center px-3 py-1 rounded-full bg-white/20 text-white text-sm font-semibold mb-6"><i class="fas fa-shield-alt mr-2"></i> Fundado en 1995</div>
-                    <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight font-montserrat lang-es">Reparación de <span class="text-frostCyan">Electrodomésticos</span> e <span class="text-frostCyan">Instalación de Aire</span></h1>
-                    <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight font-montserrat lang-en hidden">Appliance <span class="text-frostCyan">Repair</span> & AC <span class="text-frostCyan">Installation</span></h1>
-                    <p class="text-lg md:text-xl mb-8 text-blue-100 lang-es">Servicio técnico rápido en toda la <strong>Comunidad de Madrid</strong>. Reparamos tus electrodomésticos con total profesionalidad.</p>
-                    <p class="text-lg md:text-xl mb-8 text-blue-100 lang-en hidden">Fast technical service throughout the Madrid Region.</p>
-                    <div class="flex space-x-4 mb-8">
-                        <a href="contacto.html" class="px-8 py-4 rounded-md text-white font-bold bg-electricOrange transition-transform hover:scale-105 lang-es">Llamar a un Técnico</a>
-                        <a href="servicios.html" class="px-8 py-4 rounded-md bg-white text-blue-900 font-bold hover:bg-gray-100 lang-es">Ver Servicios</a>
+                    <div class="inline-flex items-center px-3 py-1 rounded-full bg-white/20 text-white text-sm font-semibold mb-6">
+                        <i class="fas fa-shield-alt mr-2"></i> 
+                        <span class="lang-es">Fundado en 1995 • Servicio Garantizado</span>
+                        <span class="lang-en hidden">Est. 1995 • Guaranteed Service</span>
                     </div>
-                    <div class="bg-blue-900/40 border-l-4 border-electricOrange p-4 rounded-r-lg inline-block">
-                        <p class="text-sm text-white font-bold mb-1"><i class="fas fa-map-marker-alt text-electricOrange mr-2"></i> Atención Directa Zona Suroeste:</p>
-                        <p class="text-xs text-blue-200">Navalcarnero, Villamanta, Villamantilla, Quijorna, Chapinería, Vva. de Perales, Sevilla la Nueva y Brunete.</p>
+                    <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight font-montserrat">
+                        <span class="lang-es">Reparación de <span class="text-frostCyan">Electrodomésticos</span> e <span class="text-frostCyan">Instalación de Aire</span></span>
+                        <span class="lang-en hidden">Expert <span class="text-frostCyan">Appliance Repair</span> & <span class="text-frostCyan">AC Installation</span></span>
+                    </h1>
+                    <p class="text-lg md:text-xl mb-8 text-blue-100 lang-es">
+                        Servicio técnico rápido en toda la <strong>Comunidad de Madrid</strong>. Reparamos tus electrodomésticos y equipos de aire acondicionado con total profesionalidad.
+                    </p>
+                    <p class="text-lg md:text-xl mb-8 text-blue-100 lang-en hidden">
+                        Fast technical service throughout the Madrid Region. We repair your appliances and AC units with utmost professionalism.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
+                        <a href="contacto.html" class="px-8 py-4 rounded-md text-white font-bold text-lg text-center transition-transform hover:scale-105 shadow-lg bg-electricOrange inline-block">
+                            <span class="lang-es">Llamar a un Técnico</span><span class="lang-en hidden">Call a Technician</span>
+                        </a>
+                        <a href="servicios.html" class="px-8 py-4 rounded-md bg-white text-blue-900 font-bold text-lg text-center transition-colors hover:bg-gray-100 inline-block">
+                            <span class="lang-es">Ver Servicios</span><span class="lang-en hidden">Our Services</span>
+                        </a>
+                    </div>
+                    
+                    <!-- ETIQUETA ELEGANTE ZONA SUROESTE -->
+                    <div class="bg-blue-900/40 border-l-4 border-electricOrange p-4 rounded-r-lg inline-block backdrop-blur-sm">
+                        <p class="text-sm text-white font-bold font-montserrat mb-1">
+                            <i class="fas fa-map-marker-alt text-electricOrange mr-2"></i> 
+                            <span class="lang-es">Atención Directa Zona Suroeste:</span>
+                            <span class="lang-en hidden">Direct Service Southwest Zone:</span>
+                        </p>
+                        <p class="text-xs text-blue-200 leading-relaxed">
+                            Navalcarnero, Villamanta, Villamantilla, Quijorna, Chapinería, Vva. de Perales, Sevilla la Nueva y Brunete.
+                        </p>
                     </div>
                 </div>
+                
                 <div class="md:w-1/2 mt-16 md:mt-0 flex justify-center lg:justify-end">
-                    <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl max-w-sm w-full">
-                        <h2 class="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4"><i class="fas fa-handshake mr-2"></i> Política de Precios Clara</h2>
-                        <div class="mb-4">
-                            <p class="text-white font-bold text-lg"><i class="fas fa-truck text-green-500 mr-2"></i> Desplazamiento siempre GRATIS</p>
-                            <p class="text-blue-200 text-sm ml-6">Vamos a tu domicilio sin coste adicional.</p>
+                    <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl shadow-2xl max-w-sm w-full transition-transform hover:-translate-y-2 duration-300">
+                        <div class="flex items-center mb-6 border-b border-white/10 pb-6">
+                            <div class="w-14 h-14 rounded-full flex items-center justify-center mr-4 bg-gradient-to-br from-blue-400 to-blue-600 shadow-inner flex-shrink-0">
+                                <i class="fas fa-handshake text-white text-2xl"></i>
+                            </div>
+                            <h2 class="text-xl font-bold text-white leading-tight font-montserrat">
+                                <span class="lang-es">Política de Precios Clara</span><span class="lang-en hidden">Clear Pricing Policy</span>
+                            </h2>
                         </div>
-                        <div>
-                            <p class="text-sm text-blue-100"><i class="fas fa-info-circle text-frostCyan mr-2"></i> La localización de la avería tiene coste <strong>solo si decides NO reparar</strong>. Si aceptas, el diagnóstico es gratis.</p>
+                        
+                        <div class="flex items-start mb-4">
+                           <div class="mt-1.5 mr-3 flex-shrink-0">
+                             <span class="flex h-3 w-3 relative">
+                               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                               <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                             </span>
+                           </div>
+                           <div>
+                               <p class="text-white font-bold text-lg leading-tight lang-es">Desplazamiento siempre GRATIS</p>
+                               <p class="text-white font-bold text-lg leading-tight lang-en hidden">Travel is always FREE</p>
+                               <p class="text-blue-200 text-sm mt-1 lang-es">Vamos a tu domicilio sin coste adicional.</p>
+                               <p class="text-blue-200 text-sm mt-1 lang-en hidden">We come to your home at no extra cost.</p>
+                           </div>
+                        </div>
+
+                        <div class="flex items-start mt-4">
+                           <div class="mt-1 mr-3 flex-shrink-0">
+                             <i class="fas fa-info-circle text-frostCyan"></i>
+                           </div>
+                           <p class="text-sm text-blue-100 leading-relaxed lang-es">
+                             La localización de la avería tiene coste <strong>solo si decides NO reparar</strong> con nosotros. Si aceptas el presupuesto de reparación, no pagas por el diagnóstico.
+                           </p>
+                           <p class="text-sm text-blue-100 leading-relaxed lang-en hidden">
+                             Fault diagnosis is charged <strong>only if you decide NOT to repair</strong>. If you proceed with the repair, the diagnosis is free.
+                           </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- MARCAS -->
+        <div class="bg-white py-8 border-b border-gray-100 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6 lang-es">Servicio Multimarca Especializado</p>
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6 lang-en hidden">Specialized Multi-brand Service</p>
+                <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale select-none">
+                    <span class="text-2xl font-black tracking-tighter">BOSCH</span>
+                    <span class="text-2xl font-bold tracking-widest">BALAY</span>
+                    <span class="text-2xl font-sans font-bold">SIEMENS</span>
+                    <span class="text-2xl font-serif font-bold italic">AEG</span>
+                    <span class="text-3xl font-black tracking-tighter">LG</span>
+                    <span class="text-2xl font-bold">SAMSUNG</span>
+                    <span class="text-2xl font-bold tracking-widest text-blue-800">Teka</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TESTIMONIOS -->
+        <div class="bg-gray-50 py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold mb-4 text-trustBlue font-montserrat lang-es">Vecinos que ya confían en nosotros</h2>
+                    <h2 class="text-3xl font-bold mb-4 text-trustBlue font-montserrat lang-en hidden">Neighbors who trust us</h2>
+                    <div class="w-16 h-1 mx-auto bg-electricOrange"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-gray-600 mb-6 italic lang-es">"Se me rompió el horno el fin de semana. Como están cerca en la zona llegaron enseguida. El técnico fue muy claro con el presupuesto y lo arregló rápido."</p>
+                        <p class="text-gray-600 mb-6 italic lang-en hidden">"My oven broke on the weekend. Since they are nearby in the area, they arrived right away. The technician was very clear with the quote and fixed it fast."</p>
+                        <div><p class="font-bold text-gray-900">Carlos M.</p><p class="text-sm text-gray-500">Navalcarnero</p></div>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-gray-600 mb-6 italic lang-es">"Me instalaron dos splits de aire acondicionado en casa. Muy limpios trabajando y explicaron perfectamente el funcionamiento. Muy recomendables."</p>
+                        <p class="text-gray-600 mb-6 italic lang-en hidden">"They installed two AC splits in my home. Very clean work and they explained perfectly how it operates. Highly recommended."</p>
+                        <div><p class="font-bold text-gray-900">Elena R.</p><p class="text-sm text-gray-500">Brunete</p></div>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                        <div class="flex text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="text-gray-600 mb-6 italic lang-es">"Llamé para que vieran la lavadora. Me dijeron lo que costaba la pieza y, como decidí arreglarla con ellos, no me cobraron nada por haber venido a mirarla."</p>
+                        <p class="text-gray-600 mb-6 italic lang-en hidden">"I called them to look at the washing machine. They told me the cost of the part and, since I decided to fix it with them, they didn't charge me for coming to check it."</p>
+                        <div><p class="font-bold text-gray-900">Jorge P.</p><p class="text-sm text-gray-500">Sevilla la Nueva</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MÓDULO SEO LOCAL DIRECTO (CON ENLACES REALES) -->
         <div class="bg-white py-16 border-t border-gray-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-xl font-bold text-trustBlue mb-6"><i class="fas fa-map-signs text-electricOrange mr-2"></i> Directorio de Servicios por Localidad</h2>
+                <div class="mb-8 border-b border-gray-200 pb-4">
+                    <h2 class="text-xl font-bold text-trustBlue font-montserrat lang-es"><i class="fas fa-map-signs mr-2 text-electricOrange"></i> Directorio de Servicios por Localidad</h2>
+                    <h2 class="text-xl font-bold text-trustBlue font-montserrat lang-en hidden"><i class="fas fa-map-signs mr-2 text-electricOrange"></i> Service Directory by Location</h2>
+                    <p class="text-sm text-gray-500 mt-2 lang-es">Encuentra tu técnico especialista más cercano en la Comunidad de Madrid.</p>
+                    <p class="text-sm text-gray-500 mt-2 lang-en hidden">Find your nearest specialist technician in the Madrid Region.</p>
+                </div>
+                
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-sm">
-                    <a href="reparacion-lavadoras-navalcarnero.html" class="text-gray-600 hover:text-electricOrange"><i class="fas fa-chevron-right text-[10px] mr-2"></i> Reparación Lavadoras Navalcarnero</a>
-                    <a href="reparacion-frigorificos-navalcarnero.html" class="text-gray-600 hover:text-electricOrange"><i class="fas fa-chevron-right text-[10px] mr-2"></i> Reparación Frigoríficos Navalcarnero</a>
-                    <a href="instalacion-aire-navalcarnero.html" class="text-gray-600 hover:text-electricOrange"><i class="fas fa-chevron-right text-[10px] mr-2"></i> Instalación Aire Navalcarnero</a>
-                    <a href="reparacion-lavadoras-villamanta.html" class="text-gray-600 hover:text-electricOrange"><i class="fas fa-chevron-right text-[10px] mr-2"></i> Reparación Lavadoras Villamanta</a>
-                    <a href="reparacion-frigorificos-villamanta.html" class="text-gray-600 hover:text-electricOrange"><i class="fas fa-chevron-right text-[10px] mr-2"></i> Reparación Frigoríficos Villamanta</a>
-                    <a href="instalacion-aire-villamanta.html" class="text-gray-600 hover:text-electricOrange"><i class="fas fa-chevron-right text-[10px] mr-2"></i> Instalación Aire Villamanta</a>
+                    <a href="reparacion-lavadoras-navalcarnero.html" class="flex items-center text-gray-600 hover:text-electricOrange transition-colors"><i class="fas fa-chevron-right text-[10px] mr-2"></i> Reparación Lavadoras Navalcarnero</a>
+                    <a href="reparacion-frigorificos-navalcarnero.html" class="flex items-center text-gray-600 hover:text-electricOrange transition-colors"><i class="fas fa-chevron-right text-[10px] mr-2"></i> Reparación Frigoríficos Navalcarnero</a>
+                    <a href="instalacion-aire-navalcarnero.html" class="flex items-center text-gray-600 hover:text-electricOrange transition-colors"><i class="fas fa-chevron-right text-[10px] mr-2"></i> Instalación Aire Navalcarnero</a>
+                    
+                    <a href="reparacion-lavadoras-villamanta.html" class="flex items-center text-gray-600 hover:text-electricOrange transition-colors"><i class="fas fa-chevron-right text-[10px] mr-2"></i> Reparación Lavadoras Villamanta</a>
+                    <a href="reparacion-frigorificos-villamanta.html" class="flex items-center text-gray-600 hover:text-electricOrange transition-colors"><i class="fas fa-chevron-right text-[10px] mr-2"></i> Reparación Frigoríficos Villamanta</a>
+                    <a href="instalacion-aire-villamanta.html" class="flex items-center text-gray-600 hover:text-electricOrange transition-colors"><i class="fas fa-chevron-right text-[10px] mr-2"></i> Instalación Aire Villamanta</a>
+                    
+                    <a href="instalacion-aire-brunete.html" class="flex items-center text-gray-600 hover:text-electricOrange transition-colors"><i class="fas fa-chevron-right text-[10px] mr-2"></i> Instalación Aire Brunete</a>
+                    <a href="reparacion-frigorificos-sevilla-la-nueva.html" class="flex items-center text-gray-600 hover:text-electricOrange transition-colors"><i class="fas fa-chevron-right text-[10px] mr-2"></i> Reparación Frigoríficos Sevilla la Nueva</a>
                 </div>
             </div>
         </div>
+
     </main>
-    <footer class="text-white py-8 mt-auto bg-trustBlue text-center text-sm"><p>&copy; 2026 NOWDIS ESPAÑA S.L. SAT Multimarca Madrid Suroeste.</p></footer>
+
+    <!-- Botón Flotante WhatsApp -->
+    <a href="https://wa.me/34630215858" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:bg-[#128C7E] transition-all hover:scale-110 z-50 flex items-center justify-center animate-bounce-slow">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- Footer Compartido -->
+    <footer class="text-white py-12 mt-auto bg-trustBlue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4 text-frostCyan">
+                        <i class="fas fa-wrench text-2xl mr-2"></i>
+                        <h2 class="font-bold text-xl tracking-tight text-white font-montserrat">NOWDIS ESPAÑA</h2>
+                    </div>
+                    <p class="text-blue-200 text-sm mb-4 max-w-md lang-es">Instalación de aire acondicionado y reparación de electrodomésticos.</p>
+                    <p class="text-blue-200 text-sm mb-4 max-w-md lang-en hidden">Air conditioning installation and appliance repair.</p>
+                    
+                    <p class="text-sm text-blue-100 mb-1 lang-es"><strong>Zonas de buzoneo y atención rápida:</strong></p>
+                    <p class="text-sm text-blue-100 mb-1 lang-en hidden"><strong>Rapid service areas:</strong></p>
+                    
+                    <p class="text-xs text-blue-300 mb-4 leading-relaxed">
+                        Navalcarnero, Villamanta, Villamantilla, Quijorna, Chapinería, Vva. de Perales, Sevilla la Nueva, Brunete, Móstoles, Alcorcón y resto de Madrid.
+                    </p>
+                    <p class="text-sm text-blue-200"><strong>CIF:</strong> B-81244782</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4 border-b border-blue-700 pb-2 lang-es">Enlaces</h3>
+                    <h3 class="font-bold text-lg mb-4 border-b border-blue-700 pb-2 lang-en hidden">Links</h3>
+                    <ul class="space-y-2 text-sm text-blue-200">
+                        <li><a href="index.html" class="hover:text-white lang-es">Inicio</a><a href="index.html" class="hover:text-white lang-en hidden">Home</a></li>
+                        <li><a href="servicios.html" class="hover:text-white lang-es">Servicios</a><a href="servicios.html" class="hover:text-white lang-en hidden">Services</a></li>
+                        <li><a href="zonas.html" class="hover:text-white lang-es">Zonas de Atención</a><a href="zonas.html" class="hover:text-white lang-en hidden">Service Areas</a></li>
+                        <li><a href="contacto.html" class="hover:text-white lang-es">Contacto Rápido</a><a href="contacto.html" class="hover:text-white lang-en hidden">Quick Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4 border-b border-blue-700 pb-2 lang-es">Contacto</h3>
+                    <h3 class="font-bold text-lg mb-4 border-b border-blue-700 pb-2 lang-en hidden">Contact</h3>
+                    <ul class="space-y-2 text-sm text-blue-200">
+                        <li><a href="tel:630215858"><i class="fas fa-phone mr-2"></i>630 215 858</a></li>
+                        <li><a href="tel:914073028"><i class="fas fa-phone mr-2"></i>91 407 30 28</a></li>
+                        <li><a href="mailto:nowdisespana@mail.com"><i class="fas fa-envelope mr-2"></i>nowdisespana@mail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-blue-800 mt-8 pt-8 text-center text-sm text-blue-300">
+                <p>&copy; 2026 NOWDIS ESPAÑA S.L. SAT Multimarca Madrid Suroeste.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lógica JS (Idioma y Menú) -->
     <script>
-        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+        
         let isEnglish = localStorage.getItem('nowdis_lang') === 'en';
+        
         function applyLanguage() {
             document.getElementById('lang-btn-text').innerText = isEnglish ? 'ES' : 'EN';
-            document.querySelectorAll('.lang-es').forEach(el => isEnglish ? el.classList.add('hidden') : el.classList.remove('hidden'));
-            document.querySelectorAll('.lang-en').forEach(el => isEnglish ? el.classList.remove('hidden') : el.classList.add('hidden'));
+            document.querySelectorAll('.lang-es').forEach(el => {
+                if(isEnglish) { el.classList.add('hidden'); } else { el.classList.remove('hidden'); }
+            });
+            document.querySelectorAll('.lang-en').forEach(el => {
+                if(isEnglish) { el.classList.remove('hidden'); } else { el.classList.add('hidden'); }
+            });
         }
-        function toggleLanguage() { isEnglish = !isEnglish; localStorage.setItem('nowdis_lang', isEnglish ? 'en' : 'es'); applyLanguage(); }
-        window.onload = applyLanguage;
+
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            localStorage.setItem('nowdis_lang', isEnglish ? 'en' : 'es');
+            applyLanguage();
+        }
+
+        window.onload = () => { applyLanguage(); };
     </script>
 </body>
 </html>
